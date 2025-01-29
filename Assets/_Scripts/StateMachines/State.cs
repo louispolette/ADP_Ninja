@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class State
 {
-    public abstract string Name { get; }
+    public virtual string Name { get; } = "Unnamed State";
 
     protected StateMachine _stateMachine;
 
@@ -17,6 +17,11 @@ public abstract class State
     public void Enter()
     {
         OnEnter();
+    }
+
+    public void HandleInput()
+    {
+        OnHandleInput();
     }
 
     /// <summary>
@@ -44,6 +49,8 @@ public abstract class State
     }
 
     protected virtual void OnEnter() { }
+
+    protected virtual void OnHandleInput() { }
 
     protected virtual void OnUpdate() { }
 

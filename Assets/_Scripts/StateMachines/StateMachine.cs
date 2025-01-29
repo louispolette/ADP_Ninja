@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public abstract class StateMachine : MonoBehaviour
+public abstract class StateMachine
 {
     protected State _currentState;
 
-    [SerializeField] private string _stateName = "None"; // Variable d'affichage (ne pas changer)
+    public string _stateName { get; private set; } = "None";
 
     protected abstract State InitialState { get; }
 
     public State CurrentState => _currentState;
 
-    protected virtual void Start()
+    public virtual void Start()
     {
         if (InitialState == null)
         {
@@ -21,11 +21,27 @@ public abstract class StateMachine : MonoBehaviour
         ChangeState(InitialState);
     }
 
-    void Update()
+    public void HandleInput()
+    {
+        if (_currentState != null)
+        {
+            _currentState.HandleInput();
+        }
+    }
+
+    public void Update()
     {
         if (_currentState != null)
         {
             _currentState.Update();
+        }
+    }
+
+    public void PhysicsUpdate()
+    {
+        if (_currentState != null)
+        {
+            _currentState.PhysicsUpdate();
         }
     }
 
