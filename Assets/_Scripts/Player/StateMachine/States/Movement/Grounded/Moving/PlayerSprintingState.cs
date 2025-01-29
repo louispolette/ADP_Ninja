@@ -4,5 +4,5 @@ public class PlayerSprintingState : PlayerMovementState
 {
     public override string Name => "Sprinting";
 
-    public PlayerSprintingState(StateMachine stateMachine) : base(stateMachine) { }
+    public PlayerSprintingState(PlayerMovementStateMachine stateMachine) : base(stateMachine) { }
 }

@@ -1,16 +1,38 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [Space]
 
-    [SerializeField] private string _currentState = "None";
+    [SerializeField] private string _currentMovementState = "None";
 
     private PlayerMovementStateMachine _movementStateMachine;
 
+    public Rigidbody Rigidbody { get; private set; }
+    public PlayerInput Input { get; private set; }
+
+    private InputAction _moveAction;
+    private InputAction _jumpAction;
+
+    public Vector2 MoveInput { get; private set; }
+
     private void Awake()
     {
-        _movementStateMachine = new PlayerMovementStateMachine();
+        _movementStateMachine = new PlayerMovementStateMachine(this);
+
+        Rigidbody = GetComponent<Rigidbody>();
+        Input = GetComponent<PlayerInput>();
+
+        InputSetup();
+
+        void InputSetup()
+        {
+            Input.onActionTriggered += ReadAction;
+
+            _moveAction = Input.currentActionMap.FindAction("Move");
+            _jumpAction = Input.currentActionMap.FindAction("Jump");
+        }
     }
 
     private void Start()
@@ -23,11 +45,41 @@ public class PlayerController : MonoBehaviour
         _movementStateMachine.HandleInput();
         _movementStateMachine.Update();
 
-        _currentState = _movementStateMachine.CurrentState.Name;
+        _currentMovementState = _movementStateMachine.CurrentState.Name;
     }
 
     private void FixedUpdate()
     {
         _movementStateMachine.PhysicsUpdate();
+    }
+
+    private void ReadAction(InputAction.CallbackContext context)
+    {
+        InputAction action = context.action;
+
+        if (action == _moveAction)
+        {
+            OnMove(context);
+        }
+        else if (action == _jumpAction)
+        {
+            OnJump(context);
+        }
+    }
+
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            MoveInput = context.ReadValue<Vector2>();
+        }
+    }
+
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("JUMP");
+        }
     }
 }
