@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private InputAction _moveAction;
     private InputAction _jumpAction;
 
-    public Vector2 MoveInput { get; private set; }
+    public Vector2 MovementInput { get; private set; }
 
     private void Awake()
     {
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            MoveInput = context.ReadValue<Vector2>();
+            MovementInput = context.ReadValue<Vector2>();
         }
     }
 
