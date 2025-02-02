@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private PlayerMovementStateMachine _movementStateMachine;
 
+    public Transform CameraTransform { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
     public PlayerInput Input { get; private set; }
 
@@ -24,10 +25,14 @@ public class PlayerController : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         Input = GetComponent<PlayerInput>();
 
+        CameraTransform = Camera.main.transform;
+
         InputSetup();
 
         void InputSetup()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+
             Input.onActionTriggered += ReadAction;
 
             _moveAction = Input.currentActionMap.FindAction("Move");
