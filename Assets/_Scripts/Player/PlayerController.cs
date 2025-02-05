@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [field : Header("Movement Stats")]
 
     [field: SerializeField] public float BaseMovementSpeed { get; private set; } = 5f;
+    [field: SerializeField] public float SprintSpeedMultiplier { get; private set; } = 1.5f;
     [field: SerializeField] public float RunningThreshold { get; private set; }
     [field: SerializeField] public float TurningSmoothTime { get; private set; }
 

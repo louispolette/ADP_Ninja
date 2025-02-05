@@ -40,8 +40,6 @@ public class FloatingCapsuleController : MonoBehaviour
 
             float springForce = (x * SpringStrength) - (rayDirVel * SpringDamper);
 
-            Debug.Log(springForce);
-
             _rb.AddForce(rayDir * springForce);
         }
     }
