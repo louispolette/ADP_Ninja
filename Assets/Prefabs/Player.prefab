@@ -222,6 +222,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentMovementState: None
+  <BaseMovementSpeed>k__BackingField: 5
+  <RunningThreshold>k__BackingField: 0.75
+  <TurningSmoothTime>k__BackingField: 0.14
+  test: 0
 --- !u!114 &4508965579350383012
 MonoBehaviour:
   m_ObjectHideFlags: 0
