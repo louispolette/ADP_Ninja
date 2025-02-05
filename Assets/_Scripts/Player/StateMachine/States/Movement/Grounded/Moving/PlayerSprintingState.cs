@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerSprintingState : PlayerMovementState
+public class PlayerSprintingState : PlayerGroundedState
 {
     public override string Name => "Sprinting";
 
