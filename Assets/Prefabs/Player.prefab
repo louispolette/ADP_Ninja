@@ -225,7 +225,6 @@ MonoBehaviour:
   <BaseMovementSpeed>k__BackingField: 5
   <RunningThreshold>k__BackingField: 0.75
   <TurningSmoothTime>k__BackingField: 0.14
-  test: 0
 --- !u!114 &4508965579350383012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 366535990520999008}
   - component: {fileID: 2850092956896868352}
+  - component: {fileID: 2925546952529065432}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -322,7 +322,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8289310136479008904}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5521de90e657bda4da9f31e2782d8eaa, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -338,6 +338,26 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2925546952529065432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8289310136479008904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb891f1e36ffb844b5652dc9d0f27e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <GroundDetectionRange>k__BackingField: 1.75
+  <RideHeight>k__BackingField: 1.25
+  <GroundDetectionLayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 8
+  <SpringStrength>k__BackingField: 100
+  <SpringDamper>k__BackingField: 1
+  _collider: {fileID: 2850092956896868352}
 --- !u!1 &8858698260825847775
 GameObject:
   m_ObjectHideFlags: 0
