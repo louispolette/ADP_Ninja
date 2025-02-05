@@ -225,7 +225,6 @@ MonoBehaviour:
   <BaseMovementSpeed>k__BackingField: 5
   <RunningThreshold>k__BackingField: 0.75
   <TurningSmoothTime>k__BackingField: 0.14
-  test: 0
 --- !u!114 &4508965579350383012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,7 +321,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8289310136479008904}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5521de90e657bda4da9f31e2782d8eaa, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

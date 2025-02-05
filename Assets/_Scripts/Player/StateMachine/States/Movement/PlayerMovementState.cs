@@ -143,7 +143,6 @@ public abstract class PlayerMovementState : State
     {
         float currentYAngle = _movementStateMachine.Player.Rigidbody.rotation.eulerAngles.y;
 
-        Debug.Log(currentYAngle == _movementStateMachine.CurrentTargetRotation.y);
         if (currentYAngle == _movementStateMachine.CurrentTargetRotation.y) return;
 
         float smoothedAngle = Mathf.SmoothDampAngle(currentYAngle,
