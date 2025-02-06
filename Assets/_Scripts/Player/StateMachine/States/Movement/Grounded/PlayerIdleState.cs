@@ -28,7 +28,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         if (_movementStateMachine.MovementInput != Vector2.zero)
         {
-            StartWalkingOrRunning();
+            _movementStateMachine.ChangeState(GetMovingState());
         }
     }
 }

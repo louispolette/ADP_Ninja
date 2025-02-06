@@ -75,7 +75,10 @@ public abstract class PlayerMovementState : State
 
     protected void ResetVelocity()
     {
-        _movementStateMachine.Player.Rigidbody.linearVelocity = Vector3.zero;
+        Vector3 newVel = _movementStateMachine.Player.Rigidbody.linearVelocity;
+        newVel.x = 0f;
+        newVel.z = 0f;
+        _movementStateMachine.Player.Rigidbody.linearVelocity = newVel;
     }
 
     #endregion

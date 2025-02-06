@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     [field: SerializeField] public float BaseMovementSpeed { get; private set; } = 5f;
     [field: SerializeField] public float SprintSpeedMultiplier { get; private set; } = 1.5f;
+    [field: SerializeField] public float CrouchSpeedMultiplier { get; private set; } = 0.5f;
     [field: SerializeField] public float RunningThreshold { get; private set; }
     [field: SerializeField] public float TurningSmoothTime { get; private set; }
 
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
     /*[field: SerializeField]*/
     public Vector2 MovementInput { get; private set; }
     //public float magnitude;
+    public bool SprintInput { get; private set; } = false;
 
     private void Awake()
     {
@@ -103,6 +105,10 @@ public class PlayerController : MonoBehaviour
         {
             OnJump(context);
         }
+        else if (action == SprintAction)
+        {
+            OnSprint(context);
+        }
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -110,7 +116,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             MovementInput = context.ReadValue<Vector2>();
-            magnitude = MovementInput.magnitude;
+            //magnitude = MovementInput.magnitude;
         }
     }
 
@@ -123,6 +129,18 @@ public class PlayerController : MonoBehaviour
         if (context.canceled)
         {
             Debug.Log("STOPPED JUMP");
+        }
+    }
+
+    private void OnSprint(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            SprintInput = true;
+        }
+        if (context.canceled)
+        {
+            SprintInput = false;
         }
     }
 }

@@ -53,16 +53,13 @@ public class PlayerSprintingState : PlayerGroundedState
 
     private void OnSprintInputCanceled(InputAction.CallbackContext context)
     {
-        Debug.Log("Sprint input canceled");
-        StartWalkingOrRunning();
+        _movementStateMachine.ChangeState(GetMovingState());
     }
 
     private void CheckMovementInput()
     {
         if (_movementStateMachine.MovementInput != Vector2.zero) return;
 
-        Debug.Log("Stopped moving");
         _movementStateMachine.ChangeState(_movementStateMachine.IdleState);
-        //StartWalkingOrRunning();
     }
 }

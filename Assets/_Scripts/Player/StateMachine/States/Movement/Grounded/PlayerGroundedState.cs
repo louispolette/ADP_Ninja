@@ -10,6 +10,7 @@ public class PlayerGroundedState : PlayerMovementState
         base.AddInputActionCallbacks();
 
         _movementStateMachine.Player.SprintAction.started += OnSprintInputPressed;
+        _movementStateMachine.Player.CrouchAction.started += OnCrouchInputPressed;
     }
 
     protected override void RemoveInputActionCallbacks()
@@ -17,20 +18,26 @@ public class PlayerGroundedState : PlayerMovementState
         base.RemoveInputActionCallbacks();
 
         _movementStateMachine.Player.SprintAction.started -= OnSprintInputPressed;
+        _movementStateMachine.Player.CrouchAction.started -= OnCrouchInputPressed;
     }
 
     /// <summary>
-    /// Changes the state to walking or running based on the movement input
+    /// Returns the walking, running or sprinting state based on input
     /// </summary>
-    protected virtual void StartWalkingOrRunning()
+    protected virtual PlayerGroundedState GetMovingState()
     {
+        if (_movementStateMachine.Player.SprintInput && _movementStateMachine.CurrentState != _movementStateMachine.SprintingState)
+        {
+            return _movementStateMachine.SprintingState;
+        }
+
         if (_movementStateMachine.MovementInput.magnitude >= RunningThreshold)
         {
-            _movementStateMachine.ChangeState(_movementStateMachine.RunningState);
+            return _movementStateMachine.RunningState;
         }
         else
         {
-            _movementStateMachine.ChangeState(_movementStateMachine.WalkState);
+            return _movementStateMachine.WalkState;
         }
     }
 
@@ -39,5 +46,17 @@ public class PlayerGroundedState : PlayerMovementState
         if (_movementStateMachine.MovementInput == Vector2.zero) return;
 
         _movementStateMachine.ChangeState(_movementStateMachine.SprintingState);
+    }
+
+    protected virtual void OnCrouchInputPressed(InputAction.CallbackContext context)
+    {
+        if (_movementStateMachine.MovementInput == Vector2.zero)
+        {
+            _movementStateMachine.ChangeState(_movementStateMachine.CrouchIdleState);
+        }
+        else
+        {
+            _movementStateMachine.ChangeState(_movementStateMachine.CrouchWalkState);
+        }
     }
 }
