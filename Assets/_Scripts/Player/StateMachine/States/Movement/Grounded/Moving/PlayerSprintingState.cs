@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,12 +24,26 @@ public class PlayerSprintingState : PlayerGroundedState
     }
 
 
-
     protected override void AddInputActionCallbacks()
     {
         base.AddInputActionCallbacks();
 
+        //_movementStateMachine.Player.SprintAction.started += TestS;
+        //_movementStateMachine.Player.SprintAction.performed += TestP;
         _movementStateMachine.Player.SprintAction.canceled += OnSprintInputCanceled;
+    }
+
+    private void TestP(InputAction.CallbackContext c) => Debug.Log("perform");
+
+    private void TestS(InputAction.CallbackContext c) => Debug.Log("started");
+
+    protected override void RemoveInputActionCallbacks()
+    {
+        base.RemoveInputActionCallbacks();
+
+        //_movementStateMachine.Player.SprintAction.started -= TestS;
+        //_movementStateMachine.Player.SprintAction.performed -= TestP;
+        _movementStateMachine.Player.SprintAction.canceled -= OnSprintInputCanceled;
     }
 
     protected override void OnSprintInputPressed(InputAction.CallbackContext context)
@@ -38,6 +53,7 @@ public class PlayerSprintingState : PlayerGroundedState
 
     private void OnSprintInputCanceled(InputAction.CallbackContext context)
     {
+        Debug.Log("Sprint input canceled");
         StartWalkingOrRunning();
     }
 
@@ -45,6 +61,8 @@ public class PlayerSprintingState : PlayerGroundedState
     {
         if (_movementStateMachine.MovementInput != Vector2.zero) return;
 
-        StartWalkingOrRunning();
+        Debug.Log("Stopped moving");
+        _movementStateMachine.ChangeState(_movementStateMachine.IdleState);
+        //StartWalkingOrRunning();
     }
 }

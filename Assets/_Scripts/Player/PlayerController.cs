@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public Transform CameraTransform { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
     public PlayerInput Input { get; private set; }
+    public Animator Animator { get; private set; }
     #endregion
 
     #region input action caching
@@ -33,12 +35,15 @@ public class PlayerController : MonoBehaviour
     public InputAction CrouchAction { get; private set; }
     #endregion
 
+    /*[field: SerializeField]*/
     public Vector2 MovementInput { get; private set; }
+    //public float magnitude;
 
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
         Input = GetComponent<PlayerInput>();
+        Animator = GetComponent<Animator>();
 
         CameraTransform = Camera.main.transform;
 
@@ -105,6 +110,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             MovementInput = context.ReadValue<Vector2>();
+            magnitude = MovementInput.magnitude;
         }
     }
 
@@ -113,6 +119,10 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             Debug.Log("JUMP");
+        }
+        if (context.canceled)
+        {
+            Debug.Log("STOPPED JUMP");
         }
     }
 }

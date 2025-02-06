@@ -49,13 +49,17 @@ public abstract class PlayerMovementState : State
 
     #region horizontal movement
 
+    /// <summary>
+    /// Handles Movement
+    /// </summary>
     private void Move()
     {
         if (_movementStateMachine.MovementInput == Vector2.zero || _movementStateMachine.SpeedModifier == 0f) return;
 
-        float targetRotationYAngle = Rotate(MovementDirection);
-        Vector3 targetRotationDirection = GetTargetRotationDirection(targetRotationYAngle);
+        UpdateTargetRotation(MovementDirection);
+        RotateTowardsTargetRotation();
 
+        Vector3 targetRotationDirection = GetTargetRotationDirection(_movementStateMachine.CurrentTargetRotation.y);
         Vector3 currentHorizontalVelocity = GetHorizontalVelocity();
 
         _movementStateMachine.Player.Rigidbody.AddForce(targetRotationDirection * MovementSpeed - currentHorizontalVelocity,
@@ -77,20 +81,11 @@ public abstract class PlayerMovementState : State
     #endregion
 
     #region rotation
-    private float Rotate(Vector3 direction)
-    {
-        float directionAngle = UpdateTargetRotation(direction);
-        
-        RotateTowardsTargetRotation();
-
-        return directionAngle;
-    }
-
     /// <summary>
     /// Updates the target rotation from a direction
     /// </summary>
-    /// <returns></returns>
-    protected float UpdateTargetRotation(Vector3 direction, bool shouldConsiderCameraRotation = true)
+    /// <returns>The new target rotation</returns>
+    protected void UpdateTargetRotation(Vector3 direction, bool shouldConsiderCameraRotation = true)
     {
         float directionAngle = GetDirectionAngle(direction);
         
@@ -101,20 +96,16 @@ public abstract class PlayerMovementState : State
 
         if (directionAngle != _movementStateMachine.CurrentTargetRotation.y)
         {
-            ChangeTargetRotation(directionAngle);
-        }
-
-        return directionAngle;
-
-
-        void ChangeTargetRotation(float targetAngle)
-        {
-            _movementStateMachine.CurrentTargetRotation.y = targetAngle;
-
+            _movementStateMachine.CurrentTargetRotation.y = directionAngle;
             _movementStateMachine.DampedTargetRotationPassedTime.y = 0f;
         }
     }
 
+    /// <summary>
+    /// Adds the camera's rotation to the given angle
+    /// </summary>
+    /// <param name="angle"></param>
+    /// <returns></returns>
     private float AddCameraRotationToAngle(float angle)
     {
         angle += _movementStateMachine.Player.CameraTransform.eulerAngles.y;
@@ -127,6 +118,11 @@ public abstract class PlayerMovementState : State
         return angle;
     }
 
+    /// <summary>
+    /// Returns the world space euler angle of the given direction
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <returns></returns>
     private float GetDirectionAngle(Vector3 direction)
     {
         float directionAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
@@ -139,6 +135,9 @@ public abstract class PlayerMovementState : State
         return directionAngle;
     }
 
+    /// <summary>
+    /// Executes the smooth rotation towards the target rotation
+    /// </summary>
     protected void RotateTowardsTargetRotation()
     {
         float currentYAngle = _movementStateMachine.Player.Rigidbody.rotation.eulerAngles.y;
@@ -156,6 +155,11 @@ public abstract class PlayerMovementState : State
         _movementStateMachine.DampedTargetRotationPassedTime.y += Time.deltaTime;
     }
 
+    /// <summary>
+    /// Returns the direction represented by the given Y-axis angle
+    /// </summary>
+    /// <param name="targetAngle"></param>
+    /// <returns></returns>
     protected Vector3 GetTargetRotationDirection(float targetAngle)
     {
         return Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
