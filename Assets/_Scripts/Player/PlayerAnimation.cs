@@ -23,6 +23,7 @@ public class PlayerAnimation : MonoBehaviour
         float ver = Input.GetAxis("Vertical");
         bool runPressed = Input.GetKey(KeyCode.LeftShift);
 
+Debug.Log(hor);
         if (hor != 0 || ver != 0)
         {
             velocity = 1; 
