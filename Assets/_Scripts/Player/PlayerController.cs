@@ -43,6 +43,10 @@ public class PlayerController : MonoBehaviour
     //public float magnitude;
     public bool IsHoldingSprintInput { get; private set; } = false;
 
+
+    [Space] public float jumpForce = 1f;
+
+
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
@@ -78,6 +82,7 @@ public class PlayerController : MonoBehaviour
     {
         StartStateMachines();
     }
+
 
     private void Update()
     {
@@ -120,10 +125,6 @@ public class PlayerController : MonoBehaviour
         {
             OnSprint(context);
         }
-        else if (action == ToggleMenuAction)
-        {
-            OnToggleMenu(context);
-        }
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -139,11 +140,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("JUMP");
+            Jump();
         }
         if (context.canceled)
         {
-            Debug.Log("STOPPED JUMP");
+            //Debug.Log("STOPPED JUMP");
         }
     }
 
@@ -159,13 +160,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnToggleMenu(InputAction.CallbackContext context)
+    public void ToggleMenu()
     {
-        if (context.started)
-        {
-            InventoryManager.Instance.OnToggleMenuInput();
-        }
+        InventoryManager.Instance.OnToggleMenuInput();
     }
 
     #endregion
+
+    // Jump à l'arrache
+    private void Jump()
+    {
+        Rigidbody.linearVelocity = new Vector3(Rigidbody.linearVelocity.x, jumpForce, Rigidbody.linearVelocity.z);
+    }
 }
