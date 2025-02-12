@@ -228,6 +228,13 @@ MonoBehaviour:
   <CrouchSpeedMultiplier>k__BackingField: 0.5
   <RunningThreshold>k__BackingField: 0.75
   <TurningSmoothTime>k__BackingField: 0.14
+  <InteractionRange>k__BackingField: 2
+  <InteractionAreaYOrigin>k__BackingField: 0.5
+  <InteractionLayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
+  <CameraInput>k__BackingField: {fileID: 0}
+  jumpForce: 1
 --- !u!114 &4508965579350383012
 MonoBehaviour:
   m_ObjectHideFlags: 0
