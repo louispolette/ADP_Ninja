@@ -34,12 +34,14 @@ public class PlayerController : MonoBehaviour
     public InputAction JumpAction { get; private set; }
     public InputAction SprintAction { get; private set; }
     public InputAction CrouchAction { get; private set; }
+    public InputAction InteractAction { get; private set; }
+    public InputAction ToggleMenuAction { get; private set; }
     #endregion
 
     /*[field: SerializeField]*/
     public Vector2 MovementInput { get; private set; }
     //public float magnitude;
-    public bool SprintInput { get; private set; } = false;
+    public bool IsHoldingSprintInput { get; private set; } = false;
 
     private void Awake()
     {
@@ -62,6 +64,8 @@ public class PlayerController : MonoBehaviour
             JumpAction = Input.currentActionMap.FindAction("Jump");
             SprintAction = Input.currentActionMap.FindAction("Sprint");
             CrouchAction = Input.currentActionMap.FindAction("Crouch");
+            InteractAction = Input.currentActionMap.FindAction("Interact");
+            ToggleMenuAction = Input.currentActionMap.FindAction("ToggleMenu");
         }
 
         void StateMachinesSetup()
@@ -93,6 +97,13 @@ public class PlayerController : MonoBehaviour
         _movementStateMachine.Start();
     }
 
+    public void Interact()
+    {
+        Debug.Log("Interact");
+    }
+
+    #region input methods
+
     private void ReadAction(InputAction.CallbackContext context)
     {
         InputAction action = context.action;
@@ -108,6 +119,10 @@ public class PlayerController : MonoBehaviour
         else if (action == SprintAction)
         {
             OnSprint(context);
+        }
+        else if (action == ToggleMenuAction)
+        {
+            OnToggleMenu(context);
         }
     }
 
@@ -136,11 +151,21 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started)
         {
-            SprintInput = true;
+            IsHoldingSprintInput = true;
         }
         if (context.canceled)
         {
-            SprintInput = false;
+            IsHoldingSprintInput = false;
         }
     }
+
+    private void OnToggleMenu(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            InventoryManager.Instance.OnToggleMenuInput();
+        }
+    }
+
+    #endregion
 }

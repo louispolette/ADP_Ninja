@@ -11,6 +11,7 @@ public class PlayerGroundedState : PlayerMovementState
 
         _movementStateMachine.Player.SprintAction.started += OnSprintInputPressed;
         _movementStateMachine.Player.CrouchAction.started += OnCrouchInputPressed;
+        _movementStateMachine.Player.InteractAction.started += OnInteractInputPressed;
     }
 
     protected override void RemoveInputActionCallbacks()
@@ -19,6 +20,7 @@ public class PlayerGroundedState : PlayerMovementState
 
         _movementStateMachine.Player.SprintAction.started -= OnSprintInputPressed;
         _movementStateMachine.Player.CrouchAction.started -= OnCrouchInputPressed;
+        _movementStateMachine.Player.InteractAction.started -= OnInteractInputPressed;
     }
 
     /// <summary>
@@ -26,7 +28,7 @@ public class PlayerGroundedState : PlayerMovementState
     /// </summary>
     protected virtual PlayerGroundedState GetMovingState()
     {
-        if (_movementStateMachine.Player.SprintInput && _movementStateMachine.CurrentState != _movementStateMachine.SprintingState)
+        if (_movementStateMachine.Player.IsHoldingSprintInput && _movementStateMachine.CurrentState != _movementStateMachine.SprintingState)
         {
             return _movementStateMachine.SprintingState;
         }
@@ -58,5 +60,10 @@ public class PlayerGroundedState : PlayerMovementState
         {
             _movementStateMachine.ChangeState(_movementStateMachine.CrouchWalkState);
         }
+    }
+
+    protected virtual void OnInteractInputPressed(InputAction.CallbackContext context)
+    {
+        _movementStateMachine.Player.Interact();
     }
 }
