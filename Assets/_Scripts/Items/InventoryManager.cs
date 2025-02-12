@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -5,73 +6,68 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance;
 
     [field: Space]
-    
-    [field : SerializeField] public int InventorySize { get; private set; } = 255;
-    [field : SerializeField] public InventoryItem[] Content { get; private set; }
+
+    [field: SerializeField] public InventoryUIController UIController;
+
+    [field: Space]
+
+    [field : SerializeField] public List<InventoryItem> Content { get; private set; } = new List<InventoryItem>();
 
     [Space] public ItemData testItem;
-
-    private bool _inventoryIsShown;
 
     private void Awake()
     {
         Instance = this;
-
-        Content = new InventoryItem[InventorySize];
-    }
-
-    private bool CheckIfIDInRange(int ID)
-    {
-        if (ID >= Content.Length)
-        {
-            Debug.LogError($"Item ID {ID} is out of range");
-            return false;
-        }
-
-        return true;
     }
 
     #region UI
 
-    public void OnToggleMenuInput()
-    {
-        if (!_inventoryIsShown)
-        {
-            ShowInventoryUI();
-        }
-        else
-        {
-            HideInventoryUI();
-        }
-    }
-
     public void ShowInventoryUI()
     {
-        _inventoryIsShown = true;
-        Debug.Log("Inventory Shown");
+        UIController.Show();
     }
 
     public void HideInventoryUI()
     {
-        _inventoryIsShown = false;
-        Debug.Log("Inventory Hidden");
+        UIController.Hide();
     }
 
     #endregion
 
     #region data
 
+    private InventoryItem SearchForItemInInventory(int itemID)
+    {
+        foreach (var item in Content)
+        {
+            if (item.itemData.itemID == itemID)
+            {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
     public void AddItem(ItemData itemData, int amountToAdd = 1)
     {
-        if (!CheckIfIDInRange(itemData.itemID)) return;
+        InventoryItem inventoryItem = SearchForItemInInventory(itemData.itemID);
 
-        Content[itemData.itemID].itemData = itemData;
-        Content[itemData.itemID].amount += amountToAdd;
+        if (inventoryItem != null)
+        {
+            inventoryItem.amount += amountToAdd;
+        }
+        else
+        {
+            Content.Add(new InventoryItem(itemData, amountToAdd));
+        }
     }
 
     public void RemoveItem(ItemData itemData, int amountToRemove = 1)
     {
-        if (!CheckIfIDInRange(itemData.itemID)) return;
+        InventoryItem inventoryItem = SearchForItemInInventory(itemData.itemID);
+
+        if (inventoryItem == null) return;
 
         int newAmount = Content[itemData.itemID].amount - amountToRemove;
 
@@ -87,18 +83,16 @@ public class InventoryManager : MonoBehaviour
     
     public bool HasItem(ItemData itemData)
     {
-        if (!CheckIfIDInRange(itemData.itemID)) return false;
+        InventoryItem inventoryItem = SearchForItemInInventory(itemData.itemID);
 
-        return Content[itemData.itemID] != null && Content[itemData.itemID].amount >= 1;
+        return inventoryItem != null && inventoryItem.amount >= 1;
     }
 
     public bool HasItem(ItemData itemData, int requiredAmount)
     {
-        if (!CheckIfIDInRange(itemData.itemID)) return false;
+        InventoryItem inventoryItem = SearchForItemInInventory(itemData.itemID);
 
-        if (Content[itemData.itemID] == null) return false;
-
-        return Content[itemData.itemID].amount >= requiredAmount;
+        return inventoryItem != null && inventoryItem.amount >= requiredAmount;
     }
 
     [ContextMenu("AddItem Test")]

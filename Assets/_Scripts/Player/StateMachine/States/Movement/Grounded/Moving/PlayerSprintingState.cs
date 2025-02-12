@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerSprintingState : PlayerGroundedState
+public class PlayerSprintingState : PlayerMovingState
 {
     public override string Name => "Sprinting";
 

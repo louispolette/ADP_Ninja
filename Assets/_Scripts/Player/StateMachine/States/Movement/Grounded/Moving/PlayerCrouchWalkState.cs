@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerCrouchWalkState : PlayerGroundedState
+public class PlayerCrouchWalkState : PlayerMovingState
 {
     public override string Name => "Crouch Walking";
 

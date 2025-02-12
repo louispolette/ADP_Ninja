@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerWalkState : PlayerGroundedState
+public class PlayerWalkState : PlayerMovingState
 {
     public override string Name => "Walking";
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerRunningState : PlayerGroundedState
+public class PlayerRunningState : PlayerMovingState
 {
     public override string Name => "Running";
 

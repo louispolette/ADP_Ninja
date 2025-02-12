@@ -29,7 +29,10 @@ public class PlayerController : MonoBehaviour
     public Animator Animator { get; private set; }
     #endregion
 
-    #region input action caching
+    #region input caching
+    public InputActionMap PlayerActionMap { get; private set; }
+    public InputActionMap UIActionMap { get; private set; }
+
     public InputAction MoveAction { get; private set; }
     public InputAction JumpAction { get; private set; }
     public InputAction SprintAction { get; private set; }
@@ -64,12 +67,15 @@ public class PlayerController : MonoBehaviour
 
             Input.onActionTriggered += ReadAction;
 
-            MoveAction = Input.currentActionMap.FindAction("Move");
-            JumpAction = Input.currentActionMap.FindAction("Jump");
-            SprintAction = Input.currentActionMap.FindAction("Sprint");
-            CrouchAction = Input.currentActionMap.FindAction("Crouch");
-            InteractAction = Input.currentActionMap.FindAction("Interact");
-            ToggleMenuAction = Input.currentActionMap.FindAction("ToggleMenu");
+            PlayerActionMap = Input.actions.FindActionMap("Player");
+            UIActionMap = Input.actions.FindActionMap("UI");
+
+            MoveAction = PlayerActionMap.FindAction("Move");
+            JumpAction = PlayerActionMap.FindAction("Jump");
+            SprintAction = PlayerActionMap.FindAction("Sprint");
+            CrouchAction = PlayerActionMap.FindAction("Crouch");
+            InteractAction = PlayerActionMap.FindAction("Interact");
+            ToggleMenuAction = PlayerActionMap.FindAction("OpenMenu");
         }
 
         void StateMachinesSetup()
@@ -160,9 +166,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ToggleMenu()
+    public void OpenMenu()
     {
-        InventoryManager.Instance.OnToggleMenuInput();
+        Input.currentActionMap = Input.currentActionMap = UIActionMap;
+        InventoryManager.Instance.ShowInventoryUI();
+    }
+
+    public void CloseMenu()
+    {
+        Input.currentActionMap = Input.currentActionMap = PlayerActionMap;
+        InventoryManager.Instance.HideInventoryUI();
     }
 
     #endregion
