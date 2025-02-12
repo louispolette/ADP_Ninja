@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUIController : MonoBehaviour
 {
@@ -10,12 +12,26 @@ public class InventoryUIController : MonoBehaviour
     [field : Space]
 
     [field : SerializeField] public InventorySlotController[] InventorySlots {  get; private set; }
+    [field : Space]
+    [field: SerializeField] public TextMeshProUGUI ItemNameText { get; private set; }
+    [field : SerializeField] public TextMeshProUGUI ItemDescriptionText { get; private set; }
+    [field : SerializeField] public RawImage ItemDisplayImage { get; private set; }
 
     private Canvas _canvas;
 
     private void Awake()
     {
         _canvas = GetComponent<Canvas>();
+    }
+
+    private void OnEnable()
+    {
+        InventorySlotController.onItemSelected += UpdateItemDisplay;
+    }
+
+    private void OnDisable()
+    {
+        InventorySlotController.onItemSelected -= UpdateItemDisplay;
     }
 
     public void Show()
@@ -29,7 +45,6 @@ public class InventoryUIController : MonoBehaviour
         _canvas.enabled = false;
     }
 
-    [ContextMenu("Update Slots")]
     public void UpdateSlots()
     {
         List<InventoryItem> inventoryContent = InventoryManager.Instance.Content;
@@ -47,5 +62,39 @@ public class InventoryUIController : MonoBehaviour
 
             InventorySlots[i].UpdateGraphics();
         }
+    }
+
+    private void ClearItemDisplay()
+    {
+        ItemNameText.text = "";
+        ItemDescriptionText.text = "";
+        ItemDisplayImage.enabled = false;
+        ItemDisplayImage.texture = null;
+    }
+
+    private void UpdateItemDisplay(InventoryItem inventoryItemData)
+    {
+        if (inventoryItemData == null || inventoryItemData.itemData == null)
+        {
+            ClearItemDisplay();
+            return;
+        }
+
+        ItemData itemData = inventoryItemData.itemData;
+
+        ItemNameText.text = itemData.name;
+        ItemDescriptionText.text = itemData.description;
+
+        if (itemData.icon != null)
+        {
+            ItemDisplayImage.enabled = true;
+            ItemDisplayImage.texture = itemData.icon;
+        }
+        else
+        {
+            ItemDisplayImage.enabled = false;
+            ItemDisplayImage.texture = null;
+        }
+        
     }
 }
