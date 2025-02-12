@@ -19,26 +19,26 @@ public class PlayerAnimation : MonoBehaviour
     void Update()
     {
         bool forwardPressed = Input.GetKey("w");
-        bool runPressed = Input.GetKey("left swift");
+        float hor = Input.GetAxis("Horizontal");
+        float ver = Input.GetAxis("Vertical");
+        bool runPressed = Input.GetKey(KeyCode.LeftShift);
 
-        if (forwardPressed && velocity < 1.0f)
+        if (hor != 0 || ver != 0)
         {
-            velocity += Time.deltaTime * acceleration; 
-
+            velocity = 1; 
         }
 
-        if (forwardPressed && velocity > 0.0f)
+        // if (forwardPressed && velocity > 0.0f)
+        // {
+        //     velocity -= Time.deltaTime * acceleration;
+        // }
 
-        {
-            velocity -= Time.deltaTime * acceleration;
-        }
-
-        if(!forwardPressed  && velocity  <= 0.0f)
+        if(hor == 0 && ver == 0)
         {
             velocity = 0.0f;
         }
 
-        animator.SetFloat(VelocityHash, velocity);
+        animator.SetFloat("Velocity", velocity);
 
     }
 }
