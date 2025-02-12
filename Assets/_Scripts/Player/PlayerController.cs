@@ -11,13 +11,19 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private string _currentMovementState = "None";
 
-    [field : Header("Movement Stats")]
+    [field : Header("Movement")]
 
     [field: SerializeField] public float BaseMovementSpeed { get; private set; } = 5f;
     [field: SerializeField] public float SprintSpeedMultiplier { get; private set; } = 1.5f;
     [field: SerializeField] public float CrouchSpeedMultiplier { get; private set; } = 0.5f;
     [field: SerializeField] public float RunningThreshold { get; private set; }
     [field: SerializeField] public float TurningSmoothTime { get; private set; }
+
+    [field: Header("Interaction")]
+
+    [field: SerializeField] public float InteractionRange { get; private set; }
+    [field: SerializeField] public float InteractionAreaYOrigin { get; private set; }
+    [field: SerializeField] public LayerMask InteractionLayerMask { get; private set; }
 
     [field: Header("References")]
 
@@ -120,7 +126,19 @@ public class PlayerController : MonoBehaviour
 
     public void Interact()
     {
-        Debug.Log("Interact");
+        Collider[] hitObjects = Physics.OverlapSphere(transform.position + Vector3.up * InteractionAreaYOrigin,
+                                                      InteractionRange,
+                                                      InteractionLayerMask,
+                                                      QueryTriggerInteraction.Collide);
+
+        if (hitObjects.Length > 0)
+        {
+            IInteractable interactableObject = hitObjects[0].GetComponentInParent<IInteractable>();
+
+            if (interactableObject == null) return;
+
+            interactableObject.Interact();
+        }
     }
 
     #region input methods
@@ -206,5 +224,11 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         Rigidbody.linearVelocity = new Vector3(Rigidbody.linearVelocity.x, jumpForce, Rigidbody.linearVelocity.z);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position + Vector3.up * InteractionAreaYOrigin, InteractionRange);
     }
 }
