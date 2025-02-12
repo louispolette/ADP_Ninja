@@ -12,7 +12,7 @@ public class PlayerGroundedState : PlayerMovementState
         _movementStateMachine.Player.SprintAction.started += OnSprintInputPressed;
         _movementStateMachine.Player.CrouchAction.started += OnCrouchInputPressed;
         _movementStateMachine.Player.InteractAction.started += OnInteractInputPressed;
-        _movementStateMachine.Player.ToggleMenuAction.started += OnToggleMenuInputPressed;
+        _movementStateMachine.Player.OpenMenuAction.started += OnToggleMenuInputPressed;
     }
 
     protected override void RemoveInputActionCallbacks()
@@ -22,7 +22,7 @@ public class PlayerGroundedState : PlayerMovementState
         _movementStateMachine.Player.SprintAction.started -= OnSprintInputPressed;
         _movementStateMachine.Player.CrouchAction.started -= OnCrouchInputPressed;
         _movementStateMachine.Player.InteractAction.started -= OnInteractInputPressed;
-        _movementStateMachine.Player.ToggleMenuAction.started -= OnToggleMenuInputPressed;
+        _movementStateMachine.Player.OpenMenuAction.started -= OnToggleMenuInputPressed;
     }
 
     /// <summary>

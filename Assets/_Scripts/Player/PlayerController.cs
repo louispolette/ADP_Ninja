@@ -1,4 +1,5 @@
 using NUnit.Framework.Internal;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +18,10 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float CrouchSpeedMultiplier { get; private set; } = 0.5f;
     [field: SerializeField] public float RunningThreshold { get; private set; }
     [field: SerializeField] public float TurningSmoothTime { get; private set; }
+
+    [field: Header("References")]
+
+    [field: SerializeField] public CinemachineInputAxisController CameraInput { get; private set; }
 
     #endregion
 
@@ -38,7 +43,8 @@ public class PlayerController : MonoBehaviour
     public InputAction SprintAction { get; private set; }
     public InputAction CrouchAction { get; private set; }
     public InputAction InteractAction { get; private set; }
-    public InputAction ToggleMenuAction { get; private set; }
+    public InputAction OpenMenuAction { get; private set; }
+    public InputAction CloseMenuAction { get; private set; }
     #endregion
 
     /*[field: SerializeField]*/
@@ -65,8 +71,6 @@ public class PlayerController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
 
-            Input.onActionTriggered += ReadAction;
-
             PlayerActionMap = Input.actions.FindActionMap("Player");
             UIActionMap = Input.actions.FindActionMap("UI");
 
@@ -75,7 +79,13 @@ public class PlayerController : MonoBehaviour
             SprintAction = PlayerActionMap.FindAction("Sprint");
             CrouchAction = PlayerActionMap.FindAction("Crouch");
             InteractAction = PlayerActionMap.FindAction("Interact");
-            ToggleMenuAction = PlayerActionMap.FindAction("OpenMenu");
+            OpenMenuAction = PlayerActionMap.FindAction("OpenMenu");
+
+            CloseMenuAction = UIActionMap.FindAction("CloseMenu");
+
+            Input.onActionTriggered += ReadAction;
+
+            CloseMenuAction.started += OnCloseMenuInput;
         }
 
         void StateMachinesSetup()
@@ -166,19 +176,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCloseMenuInput(InputAction.CallbackContext context) => CloseMenu();
+
+    private void ResetInput()
+    {
+        MovementInput = Vector2.zero;
+    }
+
+    #endregion
+
     public void OpenMenu()
     {
+        ResetInput();
+        CameraInput.enabled = false;
+
         Input.currentActionMap = Input.currentActionMap = UIActionMap;
         InventoryManager.Instance.ShowInventoryUI();
     }
 
     public void CloseMenu()
     {
+        CameraInput.enabled = true;
+
         Input.currentActionMap = Input.currentActionMap = PlayerActionMap;
         InventoryManager.Instance.HideInventoryUI();
     }
-
-    #endregion
 
     // Jump à l'arrache
     private void Jump()
