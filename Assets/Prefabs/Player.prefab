@@ -228,6 +228,12 @@ MonoBehaviour:
   <CrouchSpeedMultiplier>k__BackingField: 0.5
   <RunningThreshold>k__BackingField: 0.75
   <TurningSmoothTime>k__BackingField: 0.14
+  <JumpForce>k__BackingField: 5
+  <GroundCheckWidth>k__BackingField: 0.4
+  <GroundCheckYOrigin>k__BackingField: 0.25
+  <GroundCheckLayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 8
   <InteractionRange>k__BackingField: 2
   <InteractionAreaYOrigin>k__BackingField: 0.5
   <InteractionLayerMask>k__BackingField:

@@ -14,7 +14,7 @@ public class PlayerIdleState : PlayerGroundedState
 
         _movementStateMachine.SpeedModifier = 0f;
 
-        ResetVelocity();
+        ResetHorizontalVelocity();
     }
 
     protected override void OnUpdate()

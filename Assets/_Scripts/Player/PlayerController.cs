@@ -19,9 +19,19 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float RunningThreshold { get; private set; }
     [field: SerializeField] public float TurningSmoothTime { get; private set; }
 
+    [field: Header("Jumping")]
+
+    [field: SerializeField] public float JumpForce { get; private set; } = 5f;
+
+    [field: Header("GroundCheck")]
+
+    [field: SerializeField] public float GroundCheckWidth { get; private set; } = 1f;
+    [field: SerializeField] public float GroundCheckYOrigin { get; private set; }
+    [field: SerializeField] public LayerMask GroundCheckLayerMask { get; private set; }
+
     [field: Header("Interaction")]
 
-    [field: SerializeField] public float InteractionRange { get; private set; }
+    [field: SerializeField] public float InteractionRange { get; private set; } = 2f;
     [field: SerializeField] public float InteractionAreaYOrigin { get; private set; }
     [field: SerializeField] public LayerMask InteractionLayerMask { get; private set; }
 
@@ -53,14 +63,18 @@ public class PlayerController : MonoBehaviour
     public InputAction CloseMenuAction { get; private set; }
     #endregion
 
+    #region animator parameter caching
+
+    public int AnimatorParamVelocity { get; private set; }
+    public int AnimatorParamJump { get; private set; }
+    public int AnimatorParamIsSprinting { get; private set; }
+
+    #endregion
+
     /*[field: SerializeField]*/
     public Vector2 MovementInput { get; private set; }
     //public float magnitude;
     public bool IsHoldingSprintInput { get; private set; } = false;
-
-
-    [Space] public float jumpForce = 1f;
-
 
     private void Awake()
     {
@@ -72,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
         InputSetup();
         StateMachinesSetup();
+        CacheAnimatorParameterNames();
 
         void InputSetup()
         {
@@ -97,6 +112,13 @@ public class PlayerController : MonoBehaviour
         void StateMachinesSetup()
         {
             _movementStateMachine = new PlayerMovementStateMachine(this);
+        }
+
+        void CacheAnimatorParameterNames()
+        {
+            AnimatorParamVelocity = Animator.StringToHash("Velocity");
+            AnimatorParamJump = Animator.StringToHash("jump");
+            AnimatorParamIsSprinting = Animator.StringToHash("isSprinting");
         }
     }
 
@@ -151,10 +173,6 @@ public class PlayerController : MonoBehaviour
         {
             OnMove(context);
         }
-        else if (action == JumpAction)
-        {
-            OnJump(context);
-        }
         else if (action == SprintAction)
         {
             OnSprint(context);
@@ -167,18 +185,6 @@ public class PlayerController : MonoBehaviour
         {
             MovementInput = context.ReadValue<Vector2>();
             //magnitude = MovementInput.magnitude;
-        }
-    }
-
-    private void OnJump(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Jump();
-        }
-        if (context.canceled)
-        {
-            //Debug.Log("STOPPED JUMP");
         }
     }
 
@@ -220,15 +226,12 @@ public class PlayerController : MonoBehaviour
         InventoryManager.Instance.HideInventoryUI();
     }
 
-    // Jump à l'arrache
-    private void Jump()
-    {
-        Rigidbody.linearVelocity = new Vector3(Rigidbody.linearVelocity.x, jumpForce, Rigidbody.linearVelocity.z);
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position + Vector3.up * InteractionAreaYOrigin, InteractionRange);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position + Vector3.up * GroundCheckYOrigin, GroundCheckWidth);
     }
 }

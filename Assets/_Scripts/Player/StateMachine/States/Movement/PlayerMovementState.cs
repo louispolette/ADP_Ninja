@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class PlayerMovementState : State
 {
@@ -9,6 +10,10 @@ public abstract class PlayerMovementState : State
     protected float MovementSpeed =>   _movementStateMachine.Player.BaseMovementSpeed
                                      * _movementStateMachine.SpeedModifier
                                      * _movementStateMachine.MovementInput.magnitude;
+    protected float JumpForce => _movementStateMachine.Player.JumpForce;
+    protected float GroundCheckWidth => _movementStateMachine.Player.GroundCheckWidth;
+    protected float GroundCheckYOrigin => _movementStateMachine.Player.GroundCheckYOrigin;
+    protected LayerMask GroundCheckLayerMask => _movementStateMachine.Player.GroundCheckLayerMask;
     protected Vector3 MovementDirection => new Vector3(_movementStateMachine.MovementInput.x,
                                                        0f,
                                                        _movementStateMachine.MovementInput.y);
@@ -44,6 +49,29 @@ public abstract class PlayerMovementState : State
     protected override void OnPhysicsUpdate()
     {
         Move();
+        SetAnimatorVelocity();
+    }
+    #endregion
+
+    #region input
+    private void ReadMovementInput()
+    {
+        _movementStateMachine.MovementInput = _movementStateMachine.Player.MovementInput;
+    }
+
+    protected virtual void AddInputActionCallbacks()
+    {
+        _movementStateMachine.Player.JumpAction.started += OnJumpInputPressed;
+    }
+
+    protected virtual void RemoveInputActionCallbacks()
+    {
+        _movementStateMachine.Player.JumpAction.started -= OnJumpInputPressed;
+    }
+
+    protected virtual void OnJumpInputPressed(InputAction.CallbackContext context)
+    {
+        TryJump();
     }
     #endregion
 
@@ -73,7 +101,7 @@ public abstract class PlayerMovementState : State
         return horizontalVel;
     }
 
-    protected void ResetVelocity()
+    protected void ResetHorizontalVelocity()
     {
         Vector3 newVel = _movementStateMachine.Player.Rigidbody.linearVelocity;
         newVel.x = 0f;
@@ -169,14 +197,49 @@ public abstract class PlayerMovementState : State
     }
     #endregion
 
-    #region input
-    private void ReadMovementInput()
+    #region jumping
+
+    private void Jump()
     {
-        _movementStateMachine.MovementInput = _movementStateMachine.Player.MovementInput;
+        ResetVerticalVelocity();
+        _movementStateMachine.Player.Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
     }
 
-    protected virtual void AddInputActionCallbacks() { }
+    private void TryJump()
+    {
+        if (GroundCheck())
+        {
+            Jump();
+        }
+    }
 
-    protected virtual void RemoveInputActionCallbacks() { }
+    private void ResetVerticalVelocity()
+    {
+        _movementStateMachine.Player.Rigidbody.linearVelocity = new Vector3(_movementStateMachine.Player.Rigidbody.linearVelocity.x,
+                                                                             0f,
+                                                                             _movementStateMachine.Player.Rigidbody.linearVelocity.z);
+    }
+
+    private bool GroundCheck()
+    {
+        Collider[] hitObjects = Physics.OverlapSphere(_movementStateMachine.Player.transform.position + Vector3.up * GroundCheckYOrigin,
+                                                      GroundCheckWidth,
+                                                      GroundCheckLayerMask,
+                                                      QueryTriggerInteraction.Ignore);
+
+        return hitObjects.Length > 0;
+    }
+
+    #endregion
+
+    #region animation
+
+    private void SetAnimatorVelocity()
+    {
+        Vector3 vel = _movementStateMachine.Player.Rigidbody.linearVelocity;
+        float horizontalVelocityMag = new Vector3(vel.x, 0f, vel.z).magnitude;
+        _movementStateMachine.Player.Animator.SetFloat(_movementStateMachine.Player.AnimatorParamVelocity, horizontalVelocityMag);
+    }
+
     #endregion
 }
