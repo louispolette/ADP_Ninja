@@ -1382,67 +1382,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840354340}
   m_Mesh: {fileID: -1246940747776474875, guid: 92dc9ebddd6e17140b662991b0e7091d, type: 3}
---- !u!1001 &895562776
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.29999995
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.26732787
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.7000003
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.60876286
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7933523
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -105
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: d15264540057dae4f9cf73eea07b064d, type: 2}
-    - target: {fileID: 919132149155446097, guid: c258849af3620c442a28480ba918bc3c, type: 3}
-      propertyPath: m_Name
-      value: JapanesePaperLamp
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c258849af3620c442a28480ba918bc3c, type: 3}
 --- !u!1 &1103949638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,6 +1413,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1391674265
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d15264540057dae4f9cf73eea07b064d, type: 2}
+    - target: {fileID: 919132149155446097, guid: c258849af3620c442a28480ba918bc3c, type: 3}
+      propertyPath: m_Name
+      value: JapanesePaperLamp
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c258849af3620c442a28480ba918bc3c, type: 3}
 --- !u!1 &1451946987
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,7 +3170,6 @@ SceneRoots:
   - {fileID: 8154422914335018885}
   - {fileID: 691787231560668237}
   - {fileID: 7814047023714242636}
-  - {fileID: 895562776}
   - {fileID: 4442023751555817010}
   - {fileID: 8686207043217999759}
   - {fileID: 1908948408321413713}
@@ -3179,3 +3178,4 @@ SceneRoots:
   - {fileID: 1892763353}
   - {fileID: 6576824726770828152}
   - {fileID: 7044755759911109641}
+  - {fileID: 1391674265}
