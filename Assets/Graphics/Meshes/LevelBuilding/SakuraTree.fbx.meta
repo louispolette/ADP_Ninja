@@ -3,7 +3,17 @@ guid: 4e51a5f6f93d7bf41b952bc337dcea87
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mossybark02_0Mat
+    second: {fileID: 2100000, guid: 6562e64153fdbea4b99200fd4eb6f4eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sakura_branch_new01_1Mat
+    second: {fileID: 2100000, guid: 5d8503c0cf42fb6488403ad44d0f7f59, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

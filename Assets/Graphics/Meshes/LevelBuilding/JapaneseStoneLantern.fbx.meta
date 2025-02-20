@@ -3,7 +3,22 @@ guid: 8842a58da8761844db6cbb741f3481a8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Madeira
+    second: {fileID: 2100000, guid: f37a307025986b74ea665580698d9079, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pedra Lanterna
+    second: {fileID: 2100000, guid: 9642747fa1ff6524fa236fcce9050bf0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: led Falloff
+    second: {fileID: 2100000, guid: c239ea539c8d8ed4ba36b7f420f849d1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

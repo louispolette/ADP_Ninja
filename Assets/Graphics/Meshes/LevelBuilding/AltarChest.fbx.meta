@@ -3,7 +3,27 @@ guid: ecc0205d7dcfd754393a08e372c19631
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Altars
+    second: {fileID: 2100000, guid: 877994d598763fb429293812f665ca5c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Box
+    second: {fileID: 2100000, guid: f36886a273b584e4a89b2019fef00a5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sign
+    second: {fileID: 2100000, guid: aa31d265aae78d343b42126d17206048, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone_Slab
+    second: {fileID: 2100000, guid: c2abd01d534c96b4cbded493374729c9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
