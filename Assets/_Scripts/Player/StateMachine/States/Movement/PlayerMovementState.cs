@@ -7,9 +7,10 @@ public abstract class PlayerMovementState : State
     protected PlayerMovementStateMachine _movementStateMachine;
 
     protected float RunningThreshold => _movementStateMachine.Player.RunningThreshold;
-    protected float MovementSpeed =>   _movementStateMachine.Player.BaseMovementSpeed
+    protected float TargetSpeed =>   _movementStateMachine.Player.BaseMovementSpeed
                                      * _movementStateMachine.SpeedModifier
                                      * _movementStateMachine.MovementInput.magnitude;
+    protected float Acceleration => _movementStateMachine.Player.Acceleration;
     protected float JumpForce => _movementStateMachine.Player.JumpForce;
     protected float GroundCheckWidth => _movementStateMachine.Player.GroundCheckWidth;
     protected float GroundCheckYOrigin => _movementStateMachine.Player.GroundCheckYOrigin;
@@ -46,11 +47,46 @@ public abstract class PlayerMovementState : State
         ReadMovementInput();
     }
 
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        SetAnimatorVelocity(_movementStateMachine.Player.MovementInput.magnitude);
+    }
+
     protected override void OnPhysicsUpdate()
     {
         Move();
-        SetAnimatorVelocity();
     }
+    #endregion
+
+    #region state finding
+
+    /// <summary>
+    /// Returns the walking, running or sprinting state based on input
+    /// </summary>
+    protected virtual PlayerGroundedState GetGroundedState()
+    {
+        if (_movementStateMachine.Player.IsHoldingSprintInput && _movementStateMachine.CurrentState != _movementStateMachine.SprintingState)
+        {
+            return _movementStateMachine.SprintingState;
+        }
+
+        if (_movementStateMachine.Player.IsHoldingCrouchInput)
+        {
+            return _movementStateMachine.CrouchIdleState;
+        }
+
+        if (_movementStateMachine.MovementInput.magnitude >= RunningThreshold)
+        {
+            return _movementStateMachine.RunningState;
+        }
+        else
+        {
+            return _movementStateMachine.WalkState;
+        }
+    }
+
     #endregion
 
     #region input
@@ -82,16 +118,25 @@ public abstract class PlayerMovementState : State
     /// </summary>
     private void Move()
     {
-        if (_movementStateMachine.MovementInput == Vector2.zero || _movementStateMachine.SpeedModifier == 0f) return;
+        bool moveInputIsZero = _movementStateMachine.MovementInput == Vector2.zero;
 
         UpdateTargetRotation(MovementDirection);
-        RotateTowardsTargetRotation();
+        // Player stops immediatly for some reason
+        if (!moveInputIsZero)
+        {
+            RotateTowardsTargetRotation();
+        }
 
         Vector3 targetRotationDirection = GetTargetRotationDirection(_movementStateMachine.CurrentTargetRotation.y);
         Vector3 currentHorizontalVelocity = GetHorizontalVelocity();
 
-        _movementStateMachine.Player.Rigidbody.AddForce(targetRotationDirection * MovementSpeed - currentHorizontalVelocity,
-                                                        ForceMode.VelocityChange);
+        Vector3 velDiff = targetRotationDirection * TargetSpeed - currentHorizontalVelocity;
+        Vector3 force = velDiff * Acceleration;
+
+        _movementStateMachine.Player.Rigidbody.AddForce(force, ForceMode.Acceleration);
+
+        //_movementStateMachine.Player.Rigidbody.AddForce(targetRotationDirection * MovementSpeed - currentHorizontalVelocity,
+                                                        //ForceMode.VelocityChange);
     }
 
     protected Vector3 GetHorizontalVelocity()
@@ -203,6 +248,7 @@ public abstract class PlayerMovementState : State
     {
         ResetVerticalVelocity();
         _movementStateMachine.Player.Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
+        _movementStateMachine.ChangeState(_movementStateMachine.JumpingState);
     }
 
     private void TryJump()
@@ -220,7 +266,7 @@ public abstract class PlayerMovementState : State
                                                                              _movementStateMachine.Player.Rigidbody.linearVelocity.z);
     }
 
-    private bool GroundCheck()
+    protected bool GroundCheck()
     {
         Collider[] hitObjects = Physics.OverlapSphere(_movementStateMachine.Player.transform.position + Vector3.up * GroundCheckYOrigin,
                                                       GroundCheckWidth,
@@ -234,11 +280,29 @@ public abstract class PlayerMovementState : State
 
     #region animation
 
-    private void SetAnimatorVelocity()
+    protected void SetAnimatorVelocity(float newValue)
     {
-        Vector3 vel = _movementStateMachine.Player.Rigidbody.linearVelocity;
+        _movementStateMachine.Player.Animator.SetFloat(_movementStateMachine.Player.AnimatorParamVelocity, newValue);
+
+        /*Vector3 vel = _movementStateMachine.Player.Rigidbody.linearVelocity;
         float horizontalVelocityMag = new Vector3(vel.x, 0f, vel.z).magnitude;
-        _movementStateMachine.Player.Animator.SetFloat(_movementStateMachine.Player.AnimatorParamVelocity, horizontalVelocityMag);
+        _movementStateMachine.Player.Animator.SetFloat(_movementStateMachine.Player.AnimatorParamVelocity, horizontalVelocityMag);*/
+    }
+
+    protected void SetAnimatorCrouchedState(bool newValue)
+    {
+        _movementStateMachine.Player.Animator.SetBool(_movementStateMachine.Player.AnimatorParamIsCrouching, newValue);
+    }
+
+    protected void SetAnimatorSprintingState(bool newValue)
+    {
+        _movementStateMachine.Player.Animator.SetBool(_movementStateMachine.Player.AnimatorParamIsSprinting, newValue);
+    }
+
+    protected void SetAnimatorAirborneState(bool newValue)
+    {
+        _movementStateMachine.Player.Animator.SetBool(_movementStateMachine.Player.AnimatorParamIsAirborne, newValue);
+
     }
 
     #endregion

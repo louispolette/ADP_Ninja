@@ -11,6 +11,9 @@ public class PlayerCrouchWalkState : PlayerMovingState
     {
         base.OnEnter();
 
+        _movementStateMachine.IsCrouching = false;
+        SetAnimatorCrouchedState(true);
+
         _movementStateMachine.SpeedModifier = _movementStateMachine.Player.CrouchSpeedMultiplier;
     }
 
@@ -19,6 +22,14 @@ public class PlayerCrouchWalkState : PlayerMovingState
         base.OnUpdate();
 
         CheckMovementInput();
+    }
+
+    protected override void OnExit()
+    {
+        base.OnExit();
+
+        _movementStateMachine.IsCrouching = false;
+        SetAnimatorCrouchedState(false);
     }
 
     protected override void AddInputActionCallbacks()
@@ -37,7 +48,7 @@ public class PlayerCrouchWalkState : PlayerMovingState
 
     private void OnCrouchInputCanceled(InputAction.CallbackContext context)
     {
-        _movementStateMachine.ChangeState(GetMovingState());
+        _movementStateMachine.ChangeState(GetGroundedState());
     }
 
     private void CheckMovementInput()

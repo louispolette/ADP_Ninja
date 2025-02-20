@@ -19,6 +19,9 @@ public class PlayerMovementStateMachine : StateMachine
     #region shared state variables
     public Vector2 MovementInput { get; set; }
     public float SpeedModifier { get; set; } = 1f;
+    public bool IsSprinting { get; set; } = false;
+    public bool IsCrouching { get; set; } = false;
+    public bool IsGrounded { get; set; } = false;
 
     private Vector3 _currentTargetRotation;
     private Vector3 _dampedTargetRotationCurrentVelocity;

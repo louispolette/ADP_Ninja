@@ -1,9 +1,26 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerGroundedState : PlayerMovementState
+public abstract class PlayerGroundedState : PlayerMovementState
 {
     public PlayerGroundedState(PlayerMovementStateMachine stateMachine) : base(stateMachine) { }
+
+    protected override void OnPhysicsUpdate()
+    {
+        base.OnPhysicsUpdate();
+
+        CheckIfStillGrounded();
+        Float();
+    }
+
+    protected void CheckIfStillGrounded()
+    {
+        if (!GroundCheck())
+        {
+            _movementStateMachine.ChangeState(_movementStateMachine.JumpingState);
+        }
+    }
 
     protected override void AddInputActionCallbacks()
     {
@@ -25,25 +42,29 @@ public class PlayerGroundedState : PlayerMovementState
         _movementStateMachine.Player.OpenMenuAction.started -= OnToggleMenuInputPressed;
     }
 
-    /// <summary>
-    /// Returns the walking, running or sprinting state based on input
-    /// </summary>
-    protected virtual PlayerGroundedState GetMovingState()
+    private void Float()
     {
-        if (_movementStateMachine.Player.IsHoldingSprintInput && _movementStateMachine.CurrentState != _movementStateMachine.SprintingState)
-        {
-            return _movementStateMachine.SprintingState;
-        }
+        PlayerController player = _movementStateMachine.Player;
+        BoxCollider collider = _movementStateMachine.Player.Collider;
 
-        if (_movementStateMachine.MovementInput.magnitude >= RunningThreshold)
+        Ray ray = new Ray(player.transform.TransformPoint(collider.center), Vector3.down);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, player.FloatingGroundDetectionRange, player.GroundCheckLayerMask, QueryTriggerInteraction.Ignore))
         {
-            return _movementStateMachine.RunningState;
-        }
-        else
-        {
-            return _movementStateMachine.WalkState;
+            Vector3 vel = player.Rigidbody.linearVelocity;
+            Vector3 rayDir = Vector3.down;
+
+            float rayDirVel = Vector3.Dot(rayDir, vel);
+
+            float x = hit.distance - player.FloatingRideHeight;
+
+            float springForce = (x * player.SpringStrength) - (rayDirVel * player.SpringDamper);
+
+            player.Rigidbody.AddForce(rayDir * springForce);
         }
     }
+
+    #region input methods
 
     protected virtual void OnSprintInputPressed(InputAction.CallbackContext context)
     {
@@ -73,4 +94,6 @@ public class PlayerGroundedState : PlayerMovementState
     {
         _movementStateMachine.Player.OpenMenu();
     }
+
+    #endregion
 }

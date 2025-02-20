@@ -1,19 +1,21 @@
-using NUnit.Framework.Internal;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance;
+
     #region exposed fields
 
-    [Space]
+    [field : Space]
 
-    [SerializeField] private string _currentMovementState = "None";
+    [field: SerializeField] public string CurrentMovementState { get; private set; } = "None";
 
     [field : Header("Movement")]
 
     [field: SerializeField] public float BaseMovementSpeed { get; private set; } = 5f;
+    [field: SerializeField] public float Acceleration { get; private set; } = 1f;
     [field: SerializeField] public float SprintSpeedMultiplier { get; private set; } = 1.5f;
     [field: SerializeField] public float CrouchSpeedMultiplier { get; private set; } = 0.5f;
     [field: SerializeField] public float RunningThreshold { get; private set; }
@@ -29,6 +31,16 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float GroundCheckYOrigin { get; private set; }
     [field: SerializeField] public LayerMask GroundCheckLayerMask { get; private set; }
 
+    [field : Header("Floating Collision")]
+
+    [field: SerializeField] public float FloatingGroundDetectionRange { get; private set; } = 1f;
+    [field: SerializeField] public float FloatingRideHeight { get; private set; } = 0.75f;
+
+    [field: Space]
+
+    [field: SerializeField] public float SpringStrength { get; private set; } = 1f;
+    [field: SerializeField] public float SpringDamper { get; private set; } = 1f;
+
     [field: Header("Interaction")]
 
     [field: SerializeField] public float InteractionRange { get; private set; } = 2f;
@@ -38,6 +50,8 @@ public class PlayerController : MonoBehaviour
     [field: Header("References")]
 
     [field: SerializeField] public CinemachineInputAxisController CameraInput { get; private set; }
+    [field: SerializeField] public CameraEffectController CameraEffectController { get; private set; }
+
 
     #endregion
 
@@ -48,6 +62,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody Rigidbody { get; private set; }
     public PlayerInput Input { get; private set; }
     public Animator Animator { get; private set; }
+    public BoxCollider Collider { get; private set; }
     #endregion
 
     #region input caching
@@ -68,6 +83,8 @@ public class PlayerController : MonoBehaviour
     public int AnimatorParamVelocity { get; private set; }
     public int AnimatorParamJump { get; private set; }
     public int AnimatorParamIsSprinting { get; private set; }
+    public int AnimatorParamIsCrouching { get; private set; }
+    public int AnimatorParamIsAirborne {  get; private set; }
 
     #endregion
 
@@ -75,12 +92,16 @@ public class PlayerController : MonoBehaviour
     public Vector2 MovementInput { get; private set; }
     //public float magnitude;
     public bool IsHoldingSprintInput { get; private set; } = false;
+    public bool IsHoldingCrouchInput { get; private set; } = false;
 
     private void Awake()
     {
+        Instance = this;
+
         Rigidbody = GetComponent<Rigidbody>();
         Input = GetComponent<PlayerInput>();
         Animator = GetComponent<Animator>();
+        Collider = GetComponentInChildren<BoxCollider>();
 
         CameraTransform = Camera.main.transform;
 
@@ -116,15 +137,18 @@ public class PlayerController : MonoBehaviour
 
         void CacheAnimatorParameterNames()
         {
-            AnimatorParamVelocity = Animator.StringToHash("Velocity");
+            AnimatorParamVelocity = Animator.StringToHash("horizontalSpeed");
             AnimatorParamJump = Animator.StringToHash("jump");
             AnimatorParamIsSprinting = Animator.StringToHash("isSprinting");
+            AnimatorParamIsCrouching = Animator.StringToHash("isCrouching");
+            AnimatorParamIsAirborne = Animator.StringToHash("isAirborne");
         }
     }
 
     private void Start()
     {
         StartStateMachines();
+        
     }
 
 
@@ -133,7 +157,7 @@ public class PlayerController : MonoBehaviour
         _movementStateMachine.HandleInput();
         _movementStateMachine.Update();
 
-        _currentMovementState = _movementStateMachine.CurrentState.Name;
+        CurrentMovementState = _movementStateMachine.CurrentState.Name;
     }
 
     private void FixedUpdate()
@@ -177,6 +201,10 @@ public class PlayerController : MonoBehaviour
         {
             OnSprint(context);
         }
+        else if (action == CrouchAction)
+        {
+            OnCrouch(context);
+        }
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -197,6 +225,18 @@ public class PlayerController : MonoBehaviour
         if (context.canceled)
         {
             IsHoldingSprintInput = false;
+        }
+    }
+
+    private void OnCrouch(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            IsHoldingCrouchInput = true;
+        }
+        if (context.canceled)
+        {
+            IsHoldingCrouchInput = false;
         }
     }
 
@@ -233,5 +273,22 @@ public class PlayerController : MonoBehaviour
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position + Vector3.up * GroundCheckYOrigin, GroundCheckWidth);
+
+        Vector3 center;
+
+        if (Collider != null)
+        {
+            center = transform.TransformPoint(Collider.center);
+        }
+        else
+        {
+            center = transform.position;
+        }
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(center, center + Vector3.down * FloatingGroundDetectionRange);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(center + Vector3.right * 0.1f, center + Vector3.down * FloatingRideHeight + Vector3.right * 0.1f);
     }
 }

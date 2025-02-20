@@ -275,7 +275,6 @@ GameObject:
   - component: {fileID: 3026919214287035296}
   - component: {fileID: 567864006288412056}
   - component: {fileID: 7898105962032373432}
-  - component: {fileID: 4475625420285895870}
   - component: {fileID: 789754301584755497}
   m_Layer: 5
   m_Name: InventoryUI
@@ -363,23 +362,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &4475625420285895870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5159787744952337601}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!225 &789754301584755497
 CanvasGroup:
   m_ObjectHideFlags: 0

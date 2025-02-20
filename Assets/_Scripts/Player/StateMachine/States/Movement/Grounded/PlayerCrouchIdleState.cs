@@ -11,9 +11,20 @@ public class PlayerCrouchIdleState : PlayerGroundedState
     {
         base.OnEnter();
 
+        _movementStateMachine.IsCrouching = true;
+        SetAnimatorCrouchedState(true);
+
         _movementStateMachine.SpeedModifier = 0f;
 
         ResetHorizontalVelocity();
+    }
+
+    protected override void OnExit()
+    {
+        base.OnExit();
+
+        _movementStateMachine.IsCrouching = false;
+        SetAnimatorCrouchedState(false);
     }
 
     protected override void OnUpdate()

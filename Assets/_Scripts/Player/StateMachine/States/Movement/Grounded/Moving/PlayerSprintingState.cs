@@ -13,6 +13,9 @@ public class PlayerSprintingState : PlayerMovingState
     {
         base.OnEnter();
 
+        _movementStateMachine.IsSprinting = true;
+        SetAnimatorSprintingState(true);
+
         _movementStateMachine.SpeedModifier = _movementStateMachine.Player.SprintSpeedMultiplier;
     }
 
@@ -21,6 +24,14 @@ public class PlayerSprintingState : PlayerMovingState
         base.OnUpdate();
 
         CheckMovementInput();
+    }
+
+    protected override void OnExit()
+    {
+        base.OnExit();
+
+        _movementStateMachine.IsSprinting = false;
+        SetAnimatorSprintingState(false);
     }
 
 
@@ -53,7 +64,7 @@ public class PlayerSprintingState : PlayerMovingState
 
     private void OnSprintInputCanceled(InputAction.CallbackContext context)
     {
-        _movementStateMachine.ChangeState(GetMovingState());
+        _movementStateMachine.ChangeState(GetGroundedState());
     }
 
     private void CheckMovementInput()
