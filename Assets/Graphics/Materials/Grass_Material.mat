@@ -28,6 +28,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 39d96a2cb026de24bb47a396209ab0a6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _alpha_text:
+        m_Texture: {fileID: 2800000, guid: 39d96a2cb026de24bb47a396209ab0a6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -47,8 +51,12 @@ Material:
     - _Scale: 0.39
     - _Smoothness: -0.18
     - _Speed: 0.83
+    - _Transform: 0
+    - _alpha_text_1: 0
     m_Colors:
     - _Albedo: {r: 1, g: 1, b: 1, a: 0}
+    - _Transform_text: {r: 1, g: 1, b: 0, a: 0}
+    - _test: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &8839491582973900622
