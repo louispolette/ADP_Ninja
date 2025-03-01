@@ -49,14 +49,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f48bde64df3d247a22f3e218075656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentMovementState: None
+  <CurrentMovementState>k__BackingField: None
   <BaseMovementSpeed>k__BackingField: 10
-  <Acceleration>k__BackingField: 5
+  <Acceleration>k__BackingField: 7.5
   <SprintSpeedMultiplier>k__BackingField: 2.5
   <CrouchSpeedMultiplier>k__BackingField: 0.5
   <RunningThreshold>k__BackingField: 0.75
-  <TurningSmoothTime>k__BackingField: 0.14
-  <JumpForce>k__BackingField: 15
+  <TurningSmoothTime>k__BackingField: 0.01
+  <JumpForce>k__BackingField: 9
   <GroundCheckWidth>k__BackingField: 0.4
   <GroundCheckYOrigin>k__BackingField: 0.25
   <GroundCheckLayerMask>k__BackingField:
@@ -66,11 +66,6 @@ MonoBehaviour:
   <FloatingRideHeight>k__BackingField: 1
   <SpringStrength>k__BackingField: 3000
   <SpringDamper>k__BackingField: 50
-  <InteractionRange>k__BackingField: 2
-  <InteractionAreaYOrigin>k__BackingField: 0.5
-  <InteractionLayerMask>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 64
   <CameraInput>k__BackingField: {fileID: 0}
   <CameraEffectController>k__BackingField: {fileID: 0}
 --- !u!114 &4508965579350383012
@@ -216,7 +211,7 @@ Animator:
   m_GameObject: {fileID: 5121670023446512799}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b8f6b1c7d089ec6488a4df6f19600f4a, type: 3}
-  m_Controller: {fileID: 9100000, guid: ffaeb812b7787f947be05ccf10d5e0f2, type: 2}
+  m_Controller: {fileID: 9100000, guid: b2f9c5af9c4474147983fb9edcbbd146, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

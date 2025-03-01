@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class WorldspaceIcon : MonoBehaviour
 {
-    [field : SerializeField] public Transform FollowedTransform { get; private set; }
-    [field: SerializeField] public RectTransform CanvasRectTransform { get; private set; }
+    [field : SerializeField] public Transform FollowedTransform { get; set; }
+    [field: SerializeField] public RectTransform CanvasRectTransform { get; set; }
 
     private Camera _mainCamera;
     private RectTransform _rectTransform;

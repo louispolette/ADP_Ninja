@@ -41,11 +41,11 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float SpringStrength { get; private set; } = 1f;
     [field: SerializeField] public float SpringDamper { get; private set; } = 1f;
 
-    [field: Header("Interaction")]
-
+    /*[field: Header("Interaction")]
+    [field: SerializeField] public SphereCollider InteractionArea { get; private set; }
     [field: SerializeField] public float InteractionRange { get; private set; } = 2f;
     [field: SerializeField] public float InteractionAreaYOrigin { get; private set; }
-    [field: SerializeField] public LayerMask InteractionLayerMask { get; private set; }
+    [field: SerializeField] public LayerMask InteractionLayerMask { get; private set; }*/
 
     [field: Header("References")]
 
@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
     public PlayerInput Input { get; private set; }
     public Animator Animator { get; private set; }
     public BoxCollider Collider { get; private set; }
+    public PlayerInteractionHandler InteractionHandler { get; private set; }
     #endregion
 
     #region input caching
@@ -102,6 +103,7 @@ public class PlayerController : MonoBehaviour
         Input = GetComponent<PlayerInput>();
         Animator = GetComponent<Animator>();
         Collider = GetComponentInChildren<BoxCollider>();
+        InteractionHandler = GetComponentInChildren<PlayerInteractionHandler>();
 
         CameraTransform = Camera.main.transform;
 
@@ -172,7 +174,9 @@ public class PlayerController : MonoBehaviour
 
     public void Interact()
     {
-        Collider[] hitObjects = Physics.OverlapSphere(transform.position + Vector3.up * InteractionAreaYOrigin,
+        InteractionHandler.Interact();
+
+        /*Collider[] hitObjects = Physics.OverlapSphere(transform.position + Vector3.up * InteractionAreaYOrigin,
                                                       InteractionRange,
                                                       InteractionLayerMask,
                                                       QueryTriggerInteraction.Collide);
@@ -184,7 +188,7 @@ public class PlayerController : MonoBehaviour
             if (interactableObject == null) return;
 
             interactableObject.Interact();
-        }
+        }*/
     }
 
     #region input methods
@@ -268,9 +272,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position + Vector3.up * InteractionAreaYOrigin, InteractionRange);
-
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position + Vector3.up * GroundCheckYOrigin, GroundCheckWidth);
 
