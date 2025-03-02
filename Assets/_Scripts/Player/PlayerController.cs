@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [field : Space]
 
     [field: SerializeField] public string CurrentMovementState { get; private set; } = "None";
+    [field: SerializeField] public string PreviousMovementState { get; private set; } = "None";
 
     [field : Header("Movement")]
 
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
     public Animator Animator { get; private set; }
     public BoxCollider Collider { get; private set; }
     public PlayerInteractionHandler InteractionHandler { get; private set; }
+    public PlayerAnimationHandler AnimationHandler { get; private set; }
     #endregion
 
     #region input caching
@@ -79,21 +81,11 @@ public class PlayerController : MonoBehaviour
     public InputAction CloseMenuAction { get; private set; }
     #endregion
 
-    #region animator parameter caching
-
-    public int AnimatorParamVelocity { get; private set; }
-    public int AnimatorParamJump { get; private set; }
-    public int AnimatorParamIsSprinting { get; private set; }
-    public int AnimatorParamIsCrouching { get; private set; }
-    public int AnimatorParamIsAirborne {  get; private set; }
-
-    #endregion
-
-    /*[field: SerializeField]*/
+    #region input variables
     public Vector2 MovementInput { get; private set; }
-    //public float magnitude;
     public bool IsHoldingSprintInput { get; private set; } = false;
     public bool IsHoldingCrouchInput { get; private set; } = false;
+    #endregion
 
     private void Awake()
     {
@@ -104,12 +96,12 @@ public class PlayerController : MonoBehaviour
         Animator = GetComponent<Animator>();
         Collider = GetComponentInChildren<BoxCollider>();
         InteractionHandler = GetComponentInChildren<PlayerInteractionHandler>();
+        AnimationHandler = GetComponent<PlayerAnimationHandler>();
 
         CameraTransform = Camera.main.transform;
 
         InputSetup();
         StateMachinesSetup();
-        CacheAnimatorParameterNames();
 
         void InputSetup()
         {
@@ -136,21 +128,11 @@ public class PlayerController : MonoBehaviour
         {
             _movementStateMachine = new PlayerMovementStateMachine(this);
         }
-
-        void CacheAnimatorParameterNames()
-        {
-            AnimatorParamVelocity = Animator.StringToHash("horizontalSpeed");
-            AnimatorParamJump = Animator.StringToHash("jump");
-            AnimatorParamIsSprinting = Animator.StringToHash("isSprinting");
-            AnimatorParamIsCrouching = Animator.StringToHash("isCrouching");
-            AnimatorParamIsAirborne = Animator.StringToHash("isAirborne");
-        }
     }
 
     private void Start()
     {
         StartStateMachines();
-        
     }
 
 
@@ -160,6 +142,11 @@ public class PlayerController : MonoBehaviour
         _movementStateMachine.Update();
 
         CurrentMovementState = _movementStateMachine.CurrentState.Name;
+
+        if (_movementStateMachine.PreviousState != null)
+        {
+            PreviousMovementState = _movementStateMachine.PreviousState.Name;
+        }
     }
 
     private void FixedUpdate()

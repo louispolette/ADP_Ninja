@@ -10,8 +10,9 @@ public class PlayerCrouchWalkState : PlayerMovingState
     protected override void OnEnter()
     {
         base.OnEnter();
+        Debug.Log("Entered Crouch Walk State");
 
-        _movementStateMachine.IsCrouching = false;
+        _movementStateMachine.IsCrouching = true;
         SetAnimatorCrouchedState(true);
 
         _movementStateMachine.SpeedModifier = _movementStateMachine.Player.CrouchSpeedMultiplier;

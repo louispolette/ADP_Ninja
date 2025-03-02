@@ -18,7 +18,7 @@ public abstract class PlayerGroundedState : PlayerMovementState
     {
         if (!GroundCheck())
         {
-            _movementStateMachine.ChangeState(_movementStateMachine.JumpingState);
+            _movementStateMachine.ChangeState(_movementStateMachine.FallState);
         }
     }
 

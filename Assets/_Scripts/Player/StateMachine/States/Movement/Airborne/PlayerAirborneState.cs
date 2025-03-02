@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAirborneState : PlayerMovementState
+public abstract class PlayerAirborneState : PlayerMovementState
 {
     public override string Name => "Airborne";
 
@@ -11,7 +11,6 @@ public class PlayerAirborneState : PlayerMovementState
         base.OnEnter();
 
         SetAnimatorAirborneState(true);
-        //Debug.Log("Airborne");
     }
 
     protected override void OnExit()
@@ -19,7 +18,6 @@ public class PlayerAirborneState : PlayerMovementState
         base.OnExit();
 
         SetAnimatorAirborneState(false);
-        //Debug.Log("Grounded");
     }
 
     protected override void OnPhysicsUpdate()
@@ -35,6 +33,7 @@ public class PlayerAirborneState : PlayerMovementState
 
         if (GroundCheck())
         {
+            Land();
             _movementStateMachine.ChangeState(GetGroundedState());
         }
     }

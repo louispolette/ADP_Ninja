@@ -71,8 +71,9 @@ public abstract class PlayerMovementState : State
         {
             return _movementStateMachine.SprintingState;
         }
+        Debug.Log(_movementStateMachine.IsCrouching);
 
-        if (_movementStateMachine.Player.IsHoldingCrouchInput)
+        if (_movementStateMachine.Player.IsHoldingCrouchInput && !_movementStateMachine.IsCrouching)
         {
             return _movementStateMachine.CrouchIdleState;
         }
@@ -244,22 +245,26 @@ public abstract class PlayerMovementState : State
 
     #region jumping
 
-    private void Jump()
+    protected void DoJumpImpulse()
     {
         ResetVerticalVelocity();
         _movementStateMachine.Player.Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
-        _movementStateMachine.ChangeState(_movementStateMachine.JumpingState);
     }
 
-    private void TryJump()
+    protected void TryJump()
     {
         if (GroundCheck())
         {
-            Jump();
+            InitiateJumpPrep();
         }
     }
 
-    private void ResetVerticalVelocity()
+    protected void InitiateJumpPrep()
+    {
+        _movementStateMachine.ChangeState(_movementStateMachine.JumpPrepState); 
+    }
+
+    protected void ResetVerticalVelocity()
     {
         _movementStateMachine.Player.Rigidbody.linearVelocity = new Vector3(_movementStateMachine.Player.Rigidbody.linearVelocity.x,
                                                                              0f,
@@ -276,13 +281,18 @@ public abstract class PlayerMovementState : State
         return hitObjects.Length > 0;
     }
 
+    protected void Land()
+    {
+        SetAnimatorLand();
+    }
+
     #endregion
 
     #region animation
 
     protected void SetAnimatorVelocity(float newValue)
     {
-        _movementStateMachine.Player.Animator.SetFloat(_movementStateMachine.Player.AnimatorParamVelocity, newValue);
+        _movementStateMachine.Player.Animator.SetFloat(_movementStateMachine.Player.AnimationHandler.ParamHorizontalSpeed, newValue);
 
         /*Vector3 vel = _movementStateMachine.Player.Rigidbody.linearVelocity;
         float horizontalVelocityMag = new Vector3(vel.x, 0f, vel.z).magnitude;
@@ -291,18 +301,28 @@ public abstract class PlayerMovementState : State
 
     protected void SetAnimatorCrouchedState(bool newValue)
     {
-        _movementStateMachine.Player.Animator.SetBool(_movementStateMachine.Player.AnimatorParamIsCrouching, newValue);
+        _movementStateMachine.Player.Animator.SetBool(_movementStateMachine.Player.AnimationHandler.ParamIsCrouching, newValue);
     }
 
     protected void SetAnimatorSprintingState(bool newValue)
     {
-        _movementStateMachine.Player.Animator.SetBool(_movementStateMachine.Player.AnimatorParamIsSprinting, newValue);
+        _movementStateMachine.Player.Animator.SetBool(_movementStateMachine.Player.AnimationHandler.ParamIsSprinting, newValue);
     }
 
     protected void SetAnimatorAirborneState(bool newValue)
     {
-        _movementStateMachine.Player.Animator.SetBool(_movementStateMachine.Player.AnimatorParamIsAirborne, newValue);
+        _movementStateMachine.Player.Animator.SetBool(_movementStateMachine.Player.AnimationHandler.ParamIsAirborne, newValue);
 
+    }
+
+    protected void SetAnimatorJumpPrep()
+    {
+        _movementStateMachine.Player.Animator.SetTrigger(_movementStateMachine.Player.AnimationHandler.ParamPrepareJump);
+    }
+
+    protected void SetAnimatorLand()
+    {
+        _movementStateMachine.Player.Animator.SetTrigger(_movementStateMachine.Player.AnimationHandler.ParamLand);
     }
 
     #endregion

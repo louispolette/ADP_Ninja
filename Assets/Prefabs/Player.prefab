@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4508965579350383012}
   - component: {fileID: 8903862836124019315}
   - component: {fileID: 7977115638629819150}
+  - component: {fileID: 4604574049607923596}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -55,7 +56,7 @@ MonoBehaviour:
   <SprintSpeedMultiplier>k__BackingField: 2.5
   <CrouchSpeedMultiplier>k__BackingField: 0.5
   <RunningThreshold>k__BackingField: 0.75
-  <TurningSmoothTime>k__BackingField: 0.01
+  <TurningSmoothTime>k__BackingField: 0.1
   <JumpForce>k__BackingField: 9
   <GroundCheckWidth>k__BackingField: 0.4
   <GroundCheckYOrigin>k__BackingField: 0.25
@@ -223,6 +224,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4604574049607923596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5121670023446512799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852d6e8273cc92540bbc7b3ad7c7e1ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8289310136479008904
 GameObject:
   m_ObjectHideFlags: 0

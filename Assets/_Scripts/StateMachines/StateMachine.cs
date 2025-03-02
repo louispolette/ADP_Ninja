@@ -3,12 +3,14 @@ using UnityEngine;
 public abstract class StateMachine
 {
     protected State _currentState;
+    protected State _previousState;
 
     public string _stateName { get; private set; } = "None";
 
     protected abstract State InitialState { get; }
 
     public State CurrentState => _currentState;
+    public State PreviousState => _previousState;
 
     public virtual void Start()
     {
@@ -51,10 +53,16 @@ public abstract class StateMachine
     /// <param name="newState"></param>
     public void ChangeState(State newState)
     {
+        if (_currentState != newState)
+        {
+            _previousState = _currentState;
+        }
+
         if (_currentState != null)
         {
             _currentState.Exit();           // On appelle la méthode de sortie de l'ancien état
         }
+
         _currentState = newState;
         _currentState.Enter();              // Puis on appelle la méthode d'entrée du nouveau
         _stateName = _currentState.Name;

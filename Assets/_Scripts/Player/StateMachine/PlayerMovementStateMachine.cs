@@ -13,7 +13,8 @@ public class PlayerMovementStateMachine : StateMachine
     public PlayerSprintingState SprintingState { get; }
     public PlayerCrouchIdleState CrouchIdleState { get; }
     public PlayerCrouchWalkState CrouchWalkState { get; }
-    public PlayerJumpingState JumpingState { get; }
+    public PlayerJumpPrepState JumpPrepState { get; }
+    public PlayerFallState FallState { get; }
     #endregion
 
     #region shared state variables
@@ -44,6 +45,7 @@ public class PlayerMovementStateMachine : StateMachine
         SprintingState = new PlayerSprintingState(this);
         CrouchIdleState = new PlayerCrouchIdleState(this);
         CrouchWalkState = new PlayerCrouchWalkState(this);
-        JumpingState = new PlayerJumpingState(this);
+        JumpPrepState = new PlayerJumpPrepState(this);
+        FallState = new PlayerFallState(this);
     }
 }
