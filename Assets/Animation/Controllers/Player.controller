@@ -87,7 +87,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CrouchCycle
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4213776670222710740}
@@ -363,7 +363,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: 710fd945153cf9e429261cfc1dc42ce8, type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
+    m_TimeScale: 1.85
     m_CycleOffset: 0
     m_DirectBlendParameter: HorizontalSpeed
     m_Mirror: 0
@@ -636,7 +636,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sprint
-  m_Speed: 2
+  m_Speed: 2.75
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6736030602149176159}

@@ -6,10 +6,19 @@ public abstract class PlayerAirborneState : PlayerMovementState
 
     public PlayerAirborneState(PlayerMovementStateMachine stateMachine) : base(stateMachine) { }
 
+    protected override float Acceleration => AirAcceleration;
+    protected override float Deceleration => AirDeceleration;
+
     protected override void OnEnter()
     {
         base.OnEnter();
 
+        if (_movementStateMachine.SpeedModifier == 0f)
+        {
+            _movementStateMachine.SpeedModifier = 1f;
+        }
+
+        _movementStateMachine.IsGrounded = false;
         SetAnimatorAirborneState(true);
     }
 
@@ -33,6 +42,7 @@ public abstract class PlayerAirborneState : PlayerMovementState
 
         if (GroundCheck())
         {
+            _movementStateMachine.IsGrounded = true;
             Land();
             _movementStateMachine.ChangeState(GetGroundedState());
         }

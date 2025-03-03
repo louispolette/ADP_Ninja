@@ -10,8 +10,12 @@ public abstract class PlayerMovementState : State
     protected float TargetSpeed =>   _movementStateMachine.Player.BaseMovementSpeed
                                      * _movementStateMachine.SpeedModifier
                                      * _movementStateMachine.MovementInput.magnitude;
-    protected float Acceleration => _movementStateMachine.Player.Acceleration;
-    protected float JumpForce => _movementStateMachine.Player.JumpForce;
+    protected virtual float Acceleration => _movementStateMachine.Player.Acceleration;
+    protected virtual float Deceleration => _movementStateMachine.Player.Deceleration;
+    protected virtual float JumpForce => _movementStateMachine.Player.JumpForce;
+    protected virtual float AirDeceleration => _movementStateMachine.Player.AirDeceleration;
+    protected virtual float AirAcceleration => _movementStateMachine.Player.AirAcceleration;
+
     protected float GroundCheckWidth => _movementStateMachine.Player.GroundCheckWidth;
     protected float GroundCheckYOrigin => _movementStateMachine.Player.GroundCheckYOrigin;
     protected LayerMask GroundCheckLayerMask => _movementStateMachine.Player.GroundCheckLayerMask;
@@ -71,7 +75,6 @@ public abstract class PlayerMovementState : State
         {
             return _movementStateMachine.SprintingState;
         }
-        Debug.Log(_movementStateMachine.IsCrouching);
 
         if (_movementStateMachine.Player.IsHoldingCrouchInput && !_movementStateMachine.IsCrouching)
         {
@@ -122,6 +125,7 @@ public abstract class PlayerMovementState : State
         bool moveInputIsZero = _movementStateMachine.MovementInput == Vector2.zero;
 
         UpdateTargetRotation(MovementDirection);
+
         // Player stops immediatly for some reason
         if (!moveInputIsZero)
         {
@@ -132,7 +136,16 @@ public abstract class PlayerMovementState : State
         Vector3 currentHorizontalVelocity = GetHorizontalVelocity();
 
         Vector3 velDiff = targetRotationDirection * TargetSpeed - currentHorizontalVelocity;
-        Vector3 force = velDiff * Acceleration;
+        Vector3 force;
+
+        if (TargetSpeed >= currentHorizontalVelocity.magnitude)
+        {
+            force = velDiff * Acceleration;
+        }
+        else
+        {
+            force = velDiff * Deceleration;
+        }
 
         _movementStateMachine.Player.Rigidbody.AddForce(force, ForceMode.Acceleration);
 

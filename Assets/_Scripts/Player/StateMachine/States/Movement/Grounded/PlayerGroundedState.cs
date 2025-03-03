@@ -6,6 +6,13 @@ public abstract class PlayerGroundedState : PlayerMovementState
 {
     public PlayerGroundedState(PlayerMovementStateMachine stateMachine) : base(stateMachine) { }
 
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+
+        _movementStateMachine.IsGrounded = true;
+    }
+
     protected override void OnPhysicsUpdate()
     {
         base.OnPhysicsUpdate();
@@ -18,6 +25,7 @@ public abstract class PlayerGroundedState : PlayerMovementState
     {
         if (!GroundCheck())
         {
+            _movementStateMachine.IsGrounded = false;
             _movementStateMachine.ChangeState(_movementStateMachine.FallState);
         }
     }

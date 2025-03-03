@@ -1,12 +1,13 @@
 using UnityEngine;
 
+[System.Serializable]
 public class PlayerMovementStateMachine : StateMachine
 {
     protected override State InitialState => new PlayerIdleState(this);
 
     public PlayerController Player { get; }
 
-    #region chached states
+    #region cached states
     public PlayerIdleState IdleState { get; }
     public PlayerWalkState WalkState { get; }
     public PlayerRunningState RunningState { get; }

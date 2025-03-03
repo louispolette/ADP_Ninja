@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     [field: SerializeField] public float BaseMovementSpeed { get; private set; } = 5f;
     [field: SerializeField] public float Acceleration { get; private set; } = 1f;
+    [field: SerializeField] public float Deceleration { get; private set; } = 1f;
     [field: SerializeField] public float SprintSpeedMultiplier { get; private set; } = 1.5f;
     [field: SerializeField] public float CrouchSpeedMultiplier { get; private set; } = 0.5f;
     [field: SerializeField] public float RunningThreshold { get; private set; }
@@ -25,6 +26,9 @@ public class PlayerController : MonoBehaviour
     [field: Header("Jumping")]
 
     [field: SerializeField] public float JumpForce { get; private set; } = 5f;
+    [field: SerializeField, Min(0f)] public float AirDeceleration { get; private set; } = 0f;
+    [field: SerializeField, Min(0f)] public float AirAcceleration { get; private set; } = 5f;
+
 
     [field: Header("GroundCheck")]
 
@@ -42,12 +46,6 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float SpringStrength { get; private set; } = 1f;
     [field: SerializeField] public float SpringDamper { get; private set; } = 1f;
 
-    /*[field: Header("Interaction")]
-    [field: SerializeField] public SphereCollider InteractionArea { get; private set; }
-    [field: SerializeField] public float InteractionRange { get; private set; } = 2f;
-    [field: SerializeField] public float InteractionAreaYOrigin { get; private set; }
-    [field: SerializeField] public LayerMask InteractionLayerMask { get; private set; }*/
-
     [field: Header("References")]
 
     [field: SerializeField] public CinemachineInputAxisController CameraInput { get; private set; }
@@ -56,7 +54,11 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region state machine
+
     private PlayerMovementStateMachine _movementStateMachine;
+
+    #endregion
 
     #region components
     public Transform CameraTransform { get; private set; }

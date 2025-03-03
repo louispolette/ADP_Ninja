@@ -15,8 +15,6 @@ public class PlayerCrouchIdleState : PlayerGroundedState
         SetAnimatorCrouchedState(true);
 
         _movementStateMachine.SpeedModifier = 0f;
-
-        ResetHorizontalVelocity();
     }
 
     protected override void OnExit()
