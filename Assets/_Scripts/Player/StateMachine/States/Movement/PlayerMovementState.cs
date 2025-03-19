@@ -261,13 +261,14 @@ public abstract class PlayerMovementState : State
 
     protected void DoJumpImpulse()
     {
+        Debug.Log("Jump Impulse");
         ResetVerticalVelocity();
         _movementStateMachine.Player.Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
     }
 
     protected void TryJump()
     {
-        if (GroundCheck())
+        if (!_movementStateMachine.IsJumping && GroundCheck())
         {
             InitiateJumpPrep();
         }
@@ -275,7 +276,7 @@ public abstract class PlayerMovementState : State
 
     protected void InitiateJumpPrep()
     {
-        _movementStateMachine.ChangeState(_movementStateMachine.JumpPrepState); 
+        _movementStateMachine.ChangeState(_movementStateMachine.JumpPrepState, false);
     }
 
     protected void ResetVerticalVelocity()

@@ -5,7 +5,7 @@ public class PlayerAnimationHandler : MonoBehaviour
 {
     private Animator _animator;
 
-    public static Action OnJumpPrepEnd;
+    public static Action OnJumpPrepEnd { get; set; }
 
     #region animator parameter caching
 
@@ -40,7 +40,16 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     public void JumpPrepEnd()
     {
+        Debug.Log("EVENT FIRED");
         OnJumpPrepEnd?.Invoke();
+    }
+
+    private void Update()
+    {
+        if (OnJumpPrepEnd != null)
+        {
+            Debug.Log(OnJumpPrepEnd.GetInvocationList().Length);
+        }
     }
 
     #endregion

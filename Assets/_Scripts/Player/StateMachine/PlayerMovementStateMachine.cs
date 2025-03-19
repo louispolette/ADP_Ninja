@@ -24,11 +24,13 @@ public class PlayerMovementStateMachine : StateMachine
     public float CurrentExtraGravity { get; set; } = 1f;
     public bool IsSprinting { get; set; } = false;
     public bool IsCrouching { get; set; } = false;
+
     public bool IsGrounded { get; set; } = false;
-    public bool IsAirborneFromJump { get; set; } = false;
+    public bool IsJumping { get; set; } = false;
     public bool HasJumpInputReleasedInJump { get; set; } = false;
     public bool HasJumpBeenCanceled { get; set; } = false;
     public bool HasBufferedJumpCancel { get; set; } = false;
+    public bool HasReachedJumpCancelThreshold { get; set; } = false;
 
     private Vector3 _currentTargetRotation;
     private Vector3 _dampedTargetRotationCurrentVelocity;

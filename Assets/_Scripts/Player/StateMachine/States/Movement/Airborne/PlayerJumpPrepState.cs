@@ -10,7 +10,6 @@ public class PlayerJumpPrepState : PlayerGroundedState
     protected override void OnEnter()
     {
         base.OnEnter();
-
         _movementStateMachine.HasJumpInputReleasedInJump = _movementStateMachine.Player.JumpAction.WasReleasedThisFrame();
 
         PlayerAnimationHandler.OnJumpPrepEnd += ChangeToJumpingState;
@@ -26,7 +25,7 @@ public class PlayerJumpPrepState : PlayerGroundedState
 
     private void JumpInitialize()
     {
-        _movementStateMachine.IsAirborneFromJump = true;
+        _movementStateMachine.IsJumping = true;
         _movementStateMachine.HasJumpBeenCanceled = false;
     }
 
@@ -54,5 +53,10 @@ public class PlayerJumpPrepState : PlayerGroundedState
         base.RemoveInputActionCallbacks();
 
         _movementStateMachine.Player.JumpAction.canceled -= OnJumpInputReleased;
+    }
+
+    protected override void CheckIfStillGrounded()
+    {
+        // Do nothing
     }
 }

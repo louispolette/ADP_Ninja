@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,7 +30,6 @@ public abstract class PlayerAirborneState : PlayerMovementState
 
         if (!_movementStateMachine.HasJumpBeenCanceled && _movementStateMachine.HasJumpInputReleasedInJump)
         {
-            Debug.Log("Immediate Cancel");
             CancelJump();
         }
     }
@@ -37,6 +37,7 @@ public abstract class PlayerAirborneState : PlayerMovementState
     private void OnEnterAirborneState()
     {
         _movementStateMachine.HasBufferedJumpCancel = false;
+        _movementStateMachine.HasReachedJumpCancelThreshold = false;
         _movementStateMachine.CurrentExtraGravity = 0f;
     }
 
@@ -51,16 +52,10 @@ public abstract class PlayerAirborneState : PlayerMovementState
     {
         base.OnPhysicsUpdate();
 
-        CheckForBufferedJumpCancel();
+        CheckIfJumpCancelThresholdReached();
+        TryUseBufferedJumpCancel();
         ApplyExtraGravity();
         CheckIfStillAirborne();
-    }
-
-    private void ApplyExtraGravity()
-    {
-        Vector3 vel = _movementStateMachine.Player.Rigidbody.linearVelocity;
-        vel.y -= _movementStateMachine.CurrentExtraGravity;
-        _movementStateMachine.Player.Rigidbody.linearVelocity = vel;
     }
 
     protected void CheckIfStillAirborne()
@@ -71,48 +66,65 @@ public abstract class PlayerAirborneState : PlayerMovementState
         {
             Land();
             _movementStateMachine.ChangeState(GetGroundedState());
-            _movementStateMachine.IsAirborneFromJump = false;
         }
+    }
+
+    #region jump cancel
+    private void ApplyExtraGravity()
+    {
+        Vector3 vel = _movementStateMachine.Player.Rigidbody.linearVelocity;
+        vel.y -= _movementStateMachine.CurrentExtraGravity;
+        _movementStateMachine.Player.Rigidbody.linearVelocity = vel;
     }
 
     private void CancelJump()
     {
         if (_movementStateMachine.HasJumpBeenCanceled) return;
 
-        if (_movementStateMachine.Player.Rigidbody.linearVelocity.y <
+        if (!_movementStateMachine.HasReachedJumpCancelThreshold &&
+            _movementStateMachine.Player.Rigidbody.linearVelocity.y <
             _movementStateMachine.Player.MinimumVelocityForJumpCancel)
         {
             BufferJumpCancel();
             return;
         }
 
-        Debug.Log("Jump Canceled");
         _movementStateMachine.HasJumpBeenCanceled = true;
         _movementStateMachine.CurrentExtraGravity = JumpCancelExtraGravity;
     }
 
     private void BufferJumpCancel()
     {
-        Debug.Log($"Jump Buffered because velocity was only {_movementStateMachine.Player.Rigidbody.linearVelocity.y}");
         _movementStateMachine.HasBufferedJumpCancel = true;
     }
 
-    private void CheckForBufferedJumpCancel()
+    private void TryUseBufferedJumpCancel()
     {
         if (_movementStateMachine.HasJumpBeenCanceled) return;
 
         if (_movementStateMachine.HasBufferedJumpCancel)
         {
-            Debug.Log("Buffered jump used");
-
             _movementStateMachine.HasBufferedJumpCancel = false;
             CancelJump();
         }
     }
 
+    private void CheckIfJumpCancelThresholdReached()
+    {
+        if (_movementStateMachine.Player.Rigidbody.linearVelocity.y >=
+            _movementStateMachine.Player.MinimumVelocityForJumpCancel)
+        {
+            _movementStateMachine.HasReachedJumpCancelThreshold = true;
+        }
+    }
+
+    #endregion
+
+    #region input
+
     protected void OnJumpInputReleased(InputAction.CallbackContext context)
     {
-        if (_movementStateMachine.IsAirborneFromJump)
+        if (_movementStateMachine.IsJumping)
         {
             _movementStateMachine.HasJumpInputReleasedInJump = true;
         }
@@ -133,4 +145,6 @@ public abstract class PlayerAirborneState : PlayerMovementState
 
         _movementStateMachine.Player.JumpAction.canceled -= OnJumpInputReleased;
     }
+
+#endregion
 }

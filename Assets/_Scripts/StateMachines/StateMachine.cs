@@ -51,9 +51,16 @@ public abstract class StateMachine
     /// Permet de transitionner vers un autre état
     /// </summary>
     /// <param name="newState"></param>
-    public void ChangeState(State newState)
+    public void ChangeState(State newState, bool allowChangeIntoSelf = true)
     {
-        if (_currentState != newState)
+        if (_currentState == newState)
+        {
+            if (!allowChangeIntoSelf)
+            {
+                return;
+            }
+        }
+        else
         {
             _previousState = _currentState;
         }

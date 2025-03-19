@@ -11,6 +11,7 @@ public abstract class PlayerGroundedState : PlayerMovementState
         base.OnEnter();
 
         _movementStateMachine.IsGrounded = true;
+        _movementStateMachine.IsJumping = false;
     }
 
     protected override void OnPhysicsUpdate()
@@ -21,7 +22,7 @@ public abstract class PlayerGroundedState : PlayerMovementState
         Float();
     }
 
-    protected void CheckIfStillGrounded()
+    protected virtual void CheckIfStillGrounded()
     {
         if (!GroundCheck())
         {
