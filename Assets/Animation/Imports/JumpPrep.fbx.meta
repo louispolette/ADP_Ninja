@@ -34,7 +34,7 @@ ModelImporter:
       name: JumpPrep
       takeName: mixamo.com
       internalID: -203655887218126122
-      firstFrame: 0
+      firstFrame: 12.5
       lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
@@ -55,7 +55,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.35128543
+      - time: 0
         functionName: JumpPrepEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
