@@ -6676,11 +6676,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5989952849406459415, guid: 528522509d9357243a874858a44db6dd, type: 3}
   m_PrefabInstance: {fileID: 3619701470484333294}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &828827046 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2786935207299920213, guid: 48f609d32fd52f64aa4333ebb02d56b4, type: 3}
-  m_PrefabInstance: {fileID: 3654137088077877065}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -29350,23 +29345,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3844319266031272427, guid: 528522509d9357243a874858a44db6dd, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3844319266031272427, guid: 528522509d9357243a874858a44db6dd, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3844319266031272427, guid: 528522509d9357243a874858a44db6dd, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3844319266031272427, guid: 528522509d9357243a874858a44db6dd, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 3844319266031272427, guid: 528522509d9357243a874858a44db6dd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -37.5
       objectReference: {fileID: 0}
     - target: {fileID: 3904443742585243189, guid: 528522509d9357243a874858a44db6dd, type: 3}
       propertyPath: m_AnchorMax.y
@@ -29914,6 +29909,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48f609d32fd52f64aa4333ebb02d56b4, type: 3}
+--- !u!4 &3654137088077877066 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4098738748778189634, guid: 48f609d32fd52f64aa4333ebb02d56b4, type: 3}
+  m_PrefabInstance: {fileID: 3654137088077877065}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4408288746118754588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30095,7 +30095,7 @@ PrefabInstance:
     - target: {fileID: 8677124135504781864, guid: 54bf8c65626962c4f8ea6eebdf45fb5b, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 828827046}
+      objectReference: {fileID: 3654137088077877066}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

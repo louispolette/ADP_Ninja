@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 873255003275568134}
   - component: {fileID: 5157169130284187518}
   m_Layer: 0
-  m_Name: FreeLook Camera
+  m_Name: CinemachineCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -26,6 +26,9 @@ public class PlayerMovementStateMachine : StateMachine
     public bool IsCrouching { get; set; } = false;
     public bool IsGrounded { get; set; } = false;
     public bool IsAirborneFromJump { get; set; } = false;
+    public bool HasJumpInputReleasedInJump { get; set; } = false;
+    public bool HasJumpBeenCanceled { get; set; } = false;
+    public bool HasBufferedJumpCancel { get; set; } = false;
 
     private Vector3 _currentTargetRotation;
     private Vector3 _dampedTargetRotationCurrentVelocity;

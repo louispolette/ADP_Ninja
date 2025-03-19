@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerJumpPrepState : PlayerGroundedState
 {
@@ -9,6 +10,8 @@ public class PlayerJumpPrepState : PlayerGroundedState
     protected override void OnEnter()
     {
         base.OnEnter();
+
+        _movementStateMachine.HasJumpInputReleasedInJump = _movementStateMachine.Player.JumpAction.WasReleasedThisFrame();
 
         PlayerAnimationHandler.OnJumpPrepEnd += ChangeToJumpingState;
         SetAnimatorJumpPrep();
@@ -21,10 +24,35 @@ public class PlayerJumpPrepState : PlayerGroundedState
         PlayerAnimationHandler.OnJumpPrepEnd -= ChangeToJumpingState;
     }
 
+    private void JumpInitialize()
+    {
+        _movementStateMachine.IsAirborneFromJump = true;
+        _movementStateMachine.HasJumpBeenCanceled = false;
+    }
+
     private void ChangeToJumpingState()
     {
+        JumpInitialize();
         _movementStateMachine.ChangeState(_movementStateMachine.FallState);
-        _movementStateMachine.IsAirborneFromJump = true;
         DoJumpImpulse();
+    }
+
+    private void OnJumpInputReleased(InputAction.CallbackContext context)
+    {
+        _movementStateMachine.HasJumpInputReleasedInJump = true;
+    }
+
+    protected override void AddInputActionCallbacks()
+    {
+        base.AddInputActionCallbacks();
+
+        _movementStateMachine.Player.JumpAction.canceled += OnJumpInputReleased;
+    }
+
+    protected override void RemoveInputActionCallbacks()
+    {
+        base.RemoveInputActionCallbacks();
+
+        _movementStateMachine.Player.JumpAction.canceled -= OnJumpInputReleased;
     }
 }

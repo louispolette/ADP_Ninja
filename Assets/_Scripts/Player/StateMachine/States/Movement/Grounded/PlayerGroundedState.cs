@@ -25,7 +25,6 @@ public abstract class PlayerGroundedState : PlayerMovementState
     {
         if (!GroundCheck())
         {
-            _movementStateMachine.IsGrounded = false;
             _movementStateMachine.ChangeState(_movementStateMachine.FallState);
         }
     }

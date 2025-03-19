@@ -37,6 +37,7 @@ Transform:
   - {fileID: 5760581471381068897}
   - {fileID: 366535990520999008}
   - {fileID: 7777140204931816640}
+  - {fileID: 4098738748778189634}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5573049204333384758
@@ -63,6 +64,7 @@ MonoBehaviour:
   <JumpForce>k__BackingField: 9
   <AirDeceleration>k__BackingField: 2.5
   <AirAcceleration>k__BackingField: 5
+  <JumpCancelExtraGravity>k__BackingField: 0.5
   <GroundCheckWidth>k__BackingField: 0.4
   <GroundCheckYOrigin>k__BackingField: 0.25
   <GroundCheckLayerMask>k__BackingField:
@@ -308,6 +310,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactablesInRangeDebug: []
+--- !u!1 &7694484264543078299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4098738748778189634}
+  - component: {fileID: 6223512194317858262}
+  m_Layer: 0
+  m_Name: CameraTrackingTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4098738748778189634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694484264543078299}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2786935207299920213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6223512194317858262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694484264543078299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984b4e862fbeb794792a7db439816a72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8289310136479008904
 GameObject:
   m_ObjectHideFlags: 0

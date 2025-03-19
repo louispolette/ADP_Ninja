@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField, Min(0f)] public float AirDeceleration { get; private set; } = 0f;
     [field: SerializeField, Min(0f)] public float AirAcceleration { get; private set; } = 5f;
     [field: SerializeField, Min(0f)] public float JumpCancelExtraGravity { get; private set; } = 0.5f;
+    [field: SerializeField, Min(0f)] public float MinimumVelocityForJumpCancel { get; private set; } = 3f;
 
 
     [field: Header("GroundCheck")]

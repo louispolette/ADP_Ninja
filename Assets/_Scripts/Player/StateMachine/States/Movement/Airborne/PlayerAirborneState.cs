@@ -19,16 +19,31 @@ public abstract class PlayerAirborneState : PlayerMovementState
             _movementStateMachine.SpeedModifier = 1f;
         }
 
-        _movementStateMachine.CurrentExtraGravity = 0f;
+        if (_movementStateMachine.IsGrounded)
+        {
+            OnEnterAirborneState();
+        }
+
         _movementStateMachine.IsGrounded = false;
         SetAnimatorAirborneState(true);
+
+        if (!_movementStateMachine.HasJumpBeenCanceled && _movementStateMachine.HasJumpInputReleasedInJump)
+        {
+            Debug.Log("Immediate Cancel");
+            CancelJump();
+        }
+    }
+
+    private void OnEnterAirborneState()
+    {
+        _movementStateMachine.HasBufferedJumpCancel = false;
+        _movementStateMachine.CurrentExtraGravity = 0f;
     }
 
     protected override void OnExit()
     {
         base.OnExit();
 
-        _movementStateMachine.CurrentExtraGravity = 0f;
         SetAnimatorAirborneState(false);
     }
 
@@ -36,6 +51,7 @@ public abstract class PlayerAirborneState : PlayerMovementState
     {
         base.OnPhysicsUpdate();
 
+        CheckForBufferedJumpCancel();
         ApplyExtraGravity();
         CheckIfStillAirborne();
     }
@@ -53,31 +69,68 @@ public abstract class PlayerAirborneState : PlayerMovementState
 
         if (GroundCheck())
         {
-            _movementStateMachine.IsGrounded = true;
             Land();
             _movementStateMachine.ChangeState(GetGroundedState());
             _movementStateMachine.IsAirborneFromJump = false;
         }
     }
 
-    protected void CancelJumpVelocity(InputAction.CallbackContext context)
+    private void CancelJump()
     {
-        if (!_movementStateMachine.IsAirborneFromJump) return;
+        if (_movementStateMachine.HasJumpBeenCanceled) return;
 
+        if (_movementStateMachine.Player.Rigidbody.linearVelocity.y <
+            _movementStateMachine.Player.MinimumVelocityForJumpCancel)
+        {
+            BufferJumpCancel();
+            return;
+        }
+
+        Debug.Log("Jump Canceled");
+        _movementStateMachine.HasJumpBeenCanceled = true;
         _movementStateMachine.CurrentExtraGravity = JumpCancelExtraGravity;
+    }
+
+    private void BufferJumpCancel()
+    {
+        Debug.Log($"Jump Buffered because velocity was only {_movementStateMachine.Player.Rigidbody.linearVelocity.y}");
+        _movementStateMachine.HasBufferedJumpCancel = true;
+    }
+
+    private void CheckForBufferedJumpCancel()
+    {
+        if (_movementStateMachine.HasJumpBeenCanceled) return;
+
+        if (_movementStateMachine.HasBufferedJumpCancel)
+        {
+            Debug.Log("Buffered jump used");
+
+            _movementStateMachine.HasBufferedJumpCancel = false;
+            CancelJump();
+        }
+    }
+
+    protected void OnJumpInputReleased(InputAction.CallbackContext context)
+    {
+        if (_movementStateMachine.IsAirborneFromJump)
+        {
+            _movementStateMachine.HasJumpInputReleasedInJump = true;
+        }
+
+        CancelJump();
     }
 
     protected override void AddInputActionCallbacks()
     {
         base.AddInputActionCallbacks();
 
-        _movementStateMachine.Player.JumpAction.canceled += CancelJumpVelocity;
+        _movementStateMachine.Player.JumpAction.canceled += OnJumpInputReleased;
     }
 
     protected override void RemoveInputActionCallbacks()
     {
         base.RemoveInputActionCallbacks();
 
-        _movementStateMachine.Player.JumpAction.canceled -= CancelJumpVelocity;
+        _movementStateMachine.Player.JumpAction.canceled -= OnJumpInputReleased;
     }
 }
