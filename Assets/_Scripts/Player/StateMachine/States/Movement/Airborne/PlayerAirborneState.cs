@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class PlayerAirborneState : PlayerMovementState
 {
@@ -18,6 +19,7 @@ public abstract class PlayerAirborneState : PlayerMovementState
             _movementStateMachine.SpeedModifier = 1f;
         }
 
+        _movementStateMachine.CurrentExtraGravity = 0f;
         _movementStateMachine.IsGrounded = false;
         SetAnimatorAirborneState(true);
     }
@@ -26,6 +28,7 @@ public abstract class PlayerAirborneState : PlayerMovementState
     {
         base.OnExit();
 
+        _movementStateMachine.CurrentExtraGravity = 0f;
         SetAnimatorAirborneState(false);
     }
 
@@ -33,7 +36,15 @@ public abstract class PlayerAirborneState : PlayerMovementState
     {
         base.OnPhysicsUpdate();
 
+        ApplyExtraGravity();
         CheckIfStillAirborne();
+    }
+
+    private void ApplyExtraGravity()
+    {
+        Vector3 vel = _movementStateMachine.Player.Rigidbody.linearVelocity;
+        vel.y -= _movementStateMachine.CurrentExtraGravity;
+        _movementStateMachine.Player.Rigidbody.linearVelocity = vel;
     }
 
     protected void CheckIfStillAirborne()
@@ -45,6 +56,29 @@ public abstract class PlayerAirborneState : PlayerMovementState
             _movementStateMachine.IsGrounded = true;
             Land();
             _movementStateMachine.ChangeState(GetGroundedState());
+            _movementStateMachine.IsAirborneFromJump = false;
         }
+    }
+
+    protected void CancelJumpVelocity(InputAction.CallbackContext context)
+    {
+        if (!_movementStateMachine.IsAirborneFromJump) return;
+
+        _movementStateMachine.CurrentExtraGravity = JumpCancelExtraGravity;
+        Debug.Log("Jump Canceled");
+    }
+
+    protected override void AddInputActionCallbacks()
+    {
+        base.AddInputActionCallbacks();
+
+        _movementStateMachine.Player.JumpAction.canceled += CancelJumpVelocity;
+    }
+
+    protected override void RemoveInputActionCallbacks()
+    {
+        base.RemoveInputActionCallbacks();
+
+        _movementStateMachine.Player.JumpAction.canceled -= CancelJumpVelocity;
     }
 }

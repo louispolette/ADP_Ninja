@@ -15,6 +15,7 @@ public abstract class PlayerMovementState : State
     protected virtual float JumpForce => _movementStateMachine.Player.JumpForce;
     protected virtual float AirDeceleration => _movementStateMachine.Player.AirDeceleration;
     protected virtual float AirAcceleration => _movementStateMachine.Player.AirAcceleration;
+    protected virtual float JumpCancelExtraGravity => _movementStateMachine.Player.JumpCancelExtraGravity;
 
     protected float GroundCheckWidth => _movementStateMachine.Player.GroundCheckWidth;
     protected float GroundCheckYOrigin => _movementStateMachine.Player.GroundCheckYOrigin;

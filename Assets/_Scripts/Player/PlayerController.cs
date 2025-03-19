@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float JumpForce { get; private set; } = 5f;
     [field: SerializeField, Min(0f)] public float AirDeceleration { get; private set; } = 0f;
     [field: SerializeField, Min(0f)] public float AirAcceleration { get; private set; } = 5f;
+    [field: SerializeField, Min(0f)] public float JumpCancelExtraGravity { get; private set; } = 0.5f;
 
 
     [field: Header("GroundCheck")]
@@ -205,7 +206,6 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             MovementInput = context.ReadValue<Vector2>();
-            //magnitude = MovementInput.magnitude;
         }
     }
 

@@ -10,7 +10,7 @@ public class PlayerJumpPrepState : PlayerGroundedState
     {
         base.OnEnter();
 
-        PlayerAnimationHandler.OnJumpPrepEnd += JumpPrepEnd;
+        PlayerAnimationHandler.OnJumpPrepEnd += ChangeToJumpingState;
         SetAnimatorJumpPrep();
     }
 
@@ -18,12 +18,13 @@ public class PlayerJumpPrepState : PlayerGroundedState
     {
         base.OnExit();
 
-        PlayerAnimationHandler.OnJumpPrepEnd -= JumpPrepEnd;
+        PlayerAnimationHandler.OnJumpPrepEnd -= ChangeToJumpingState;
     }
 
-    private void JumpPrepEnd()
+    private void ChangeToJumpingState()
     {
         _movementStateMachine.ChangeState(_movementStateMachine.FallState);
+        _movementStateMachine.IsAirborneFromJump = true;
         DoJumpImpulse();
     }
 }
