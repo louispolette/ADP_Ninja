@@ -65,7 +65,6 @@ public abstract class PlayerAirborneState : PlayerMovementState
         if (!_movementStateMachine.IsAirborneFromJump) return;
 
         _movementStateMachine.CurrentExtraGravity = JumpCancelExtraGravity;
-        Debug.Log("Jump Canceled");
     }
 
     protected override void AddInputActionCallbacks()
