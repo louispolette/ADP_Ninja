@@ -48,9 +48,9 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: -0.01
-    - _Smoothness: -0.18
-    - _Speed: 0.71
+    - _Scale: -0.015
+    - _Smoothness: 0.41
+    - _Speed: 0.84
     - _Transform: 0
     - _alpha_text_1: 0
     m_Colors:
