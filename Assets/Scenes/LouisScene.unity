@@ -29904,14 +29904,6 @@ PrefabInstance:
       propertyPath: <CameraEffectController>k__BackingField
       value: 
       objectReference: {fileID: 1563229683}
-    - target: {fileID: 7145607216755764255, guid: 48f609d32fd52f64aa4333ebb02d56b4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8444073702341064080, guid: 48f609d32fd52f64aa4333ebb02d56b4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30052,6 +30044,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1261253420117065658, guid: 54bf8c65626962c4f8ea6eebdf45fb5b, type: 3}
+      propertyPath: HorizontalAxis.Center
+      value: 56.20902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261253420117065658, guid: 54bf8c65626962c4f8ea6eebdf45fb5b, type: 3}
+      propertyPath: HorizontalAxis.Recentering.Time
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261253420117065658, guid: 54bf8c65626962c4f8ea6eebdf45fb5b, type: 3}
+      propertyPath: VerticalAxis.Recentering.Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2330382720766260395, guid: 54bf8c65626962c4f8ea6eebdf45fb5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -45.8
@@ -30062,23 +30066,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2330382720766260395, guid: 54bf8c65626962c4f8ea6eebdf45fb5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -90.7
+      value: -89.2
       objectReference: {fileID: 0}
     - target: {fileID: 2330382720766260395, guid: 54bf8c65626962c4f8ea6eebdf45fb5b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99910325
+      value: 0.98885447
       objectReference: {fileID: 0}
     - target: {fileID: 2330382720766260395, guid: 54bf8c65626962c4f8ea6eebdf45fb5b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0423409
+      value: 0.10933231
       objectReference: {fileID: 0}
     - target: {fileID: 2330382720766260395, guid: 54bf8c65626962c4f8ea6eebdf45fb5b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000014121172
+      value: 0.10044888
       objectReference: {fileID: 0}
     - target: {fileID: 2330382720766260395, guid: 54bf8c65626962c4f8ea6eebdf45fb5b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -5.984398e-11
+      value: -0.011106098
       objectReference: {fileID: 0}
     - target: {fileID: 2330382720766260395, guid: 54bf8c65626962c4f8ea6eebdf45fb5b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -30135,23 +30139,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5856769525788256740, guid: 667a416aefedc0142a8b97547874d212, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -90.7
+      value: -89.2
       objectReference: {fileID: 0}
     - target: {fileID: 5856769525788256740, guid: 667a416aefedc0142a8b97547874d212, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99910325
+      value: 0.98885447
       objectReference: {fileID: 0}
     - target: {fileID: 5856769525788256740, guid: 667a416aefedc0142a8b97547874d212, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.04234091
+      value: 0.10933231
       objectReference: {fileID: 0}
     - target: {fileID: 5856769525788256740, guid: 667a416aefedc0142a8b97547874d212, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000014121174
+      value: 0.10044885
       objectReference: {fileID: 0}
     - target: {fileID: 5856769525788256740, guid: 667a416aefedc0142a8b97547874d212, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -5.9844e-11
+      value: -0.011106089
       objectReference: {fileID: 0}
     - target: {fileID: 5856769525788256740, guid: 667a416aefedc0142a8b97547874d212, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

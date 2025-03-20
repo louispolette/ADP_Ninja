@@ -6,7 +6,7 @@ public class PlayerCameraTrackingTarget : MonoBehaviour
     public Transform PlayerTransform { get; private set; }
 
 
-    public Vector3 FollowOffset { get; set; }
+    [field: SerializeField] public Vector3 FollowOffset { get; set; }
     private void Awake()
     {
         PlayerTransform = transform.parent;
@@ -18,6 +18,7 @@ public class PlayerCameraTrackingTarget : MonoBehaviour
     private void LateUpdate()
     {
         FollowPlayer();
+        CopyRotation();
     }
 
     public void SetFollowedTransform(Transform newTransformToFollow)
@@ -38,5 +39,10 @@ public class PlayerCameraTrackingTarget : MonoBehaviour
     private void FollowPlayer()
     {
         transform.position = GetNewPosition();
+    }
+
+    private void CopyRotation()
+    {
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, FollowedTransform.eulerAngles.y, transform.eulerAngles.z);
     }
 }

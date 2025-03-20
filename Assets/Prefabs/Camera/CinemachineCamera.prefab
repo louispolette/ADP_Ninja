@@ -103,23 +103,23 @@ MonoBehaviour:
   Radius: 10
   Orbits:
     Top:
-      Radius: 1
+      Radius: 1.5
       Height: 5
     Center:
-      Radius: 4
+      Radius: 2.5
       Height: 2.25
     Bottom:
-      Radius: 4
-      Height: -1
+      Radius: 3
+      Height: 0
     SplineCurvature: 0.5
-  RecenteringTarget: 3
+  RecenteringTarget: 2
   HorizontalAxis:
     Value: 0
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
     Recentering:
-      Enabled: 0
+      Enabled: 1
       Wait: 1
       Time: 2
     Restrictions: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Composition:
-    ScreenPosition: {x: 0, y: 0.14}
+    ScreenPosition: {x: -0.1, y: 0.14}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -168,7 +168,7 @@ MonoBehaviour:
   TargetOffset: {x: 0, y: 1.25, z: 0}
   Damping: {x: 0, y: 0.5}
   Lookahead:
-    Enabled: 1
+    Enabled: 0
     Time: 0.05
     Smoothing: 10
     IgnoreY: 1
