@@ -32,7 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5760581471381068897}
   - {fileID: 366535990520999008}
@@ -57,7 +57,7 @@ MonoBehaviour:
   <BaseMovementSpeed>k__BackingField: 9
   <Acceleration>k__BackingField: 7.5
   <Deceleration>k__BackingField: 19
-  <SprintSpeedMultiplier>k__BackingField: 2
+  <SprintSpeedMultiplier>k__BackingField: 1.3
   <CrouchSpeedMultiplier>k__BackingField: 0.5
   <RunningThreshold>k__BackingField: 0.75
   <TurningSmoothTime>k__BackingField: 0.1
@@ -73,7 +73,7 @@ MonoBehaviour:
     m_Bits: 8
   <FloatingGroundDetectionRange>k__BackingField: 1.5
   <FloatingRideHeight>k__BackingField: 1
-  <SpringStrength>k__BackingField: 3000
+  <SpringStrength>k__BackingField: 1500
   <SpringDamper>k__BackingField: 50
   <CameraInput>k__BackingField: {fileID: 0}
   <CameraEffectController>k__BackingField: {fileID: 0}
