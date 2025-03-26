@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField, Min(0f)] public float JumpCancelExtraGravity { get; private set; } = 0.5f;
     [field: SerializeField, Min(0f)] public float MinimumVelocityForJumpCancel { get; private set; } = 3f;
 
+    [field: Space]
+
+    [field: SerializeField, Min(0f)] public float JumpBufferDuration { get; private set; } = 0.15f;
+
 
     [field: Header("GroundCheck")]
 
@@ -66,7 +70,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody Rigidbody { get; private set; }
     public PlayerInput Input { get; private set; }
     public Animator Animator { get; private set; }
-    public BoxCollider Collider { get; private set; }
+    public CapsuleCollider Collider { get; private set; }
     public PlayerInteractionHandler InteractionHandler { get; private set; }
     public PlayerAnimationHandler AnimationHandler { get; private set; }
     #endregion
@@ -97,7 +101,7 @@ public class PlayerController : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         Input = GetComponent<PlayerInput>();
         Animator = GetComponent<Animator>();
-        Collider = GetComponentInChildren<BoxCollider>();
+        Collider = GetComponentInChildren<CapsuleCollider>();
         InteractionHandler = GetComponentInChildren<PlayerInteractionHandler>();
         AnimationHandler = GetComponent<PlayerAnimationHandler>();
 
@@ -165,20 +169,6 @@ public class PlayerController : MonoBehaviour
     public void Interact()
     {
         InteractionHandler.Interact();
-
-        /*Collider[] hitObjects = Physics.OverlapSphere(transform.position + Vector3.up * InteractionAreaYOrigin,
-                                                      InteractionRange,
-                                                      InteractionLayerMask,
-                                                      QueryTriggerInteraction.Collide);
-
-        if (hitObjects.Length > 0)
-        {
-            IInteractable interactableObject = hitObjects[0].GetComponentInParent<IInteractable>();
-
-            if (interactableObject == null) return;
-
-            interactableObject.Interact();
-        }*/
     }
 
     #region input methods

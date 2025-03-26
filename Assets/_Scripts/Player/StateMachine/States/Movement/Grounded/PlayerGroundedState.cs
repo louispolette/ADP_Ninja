@@ -53,11 +53,12 @@ public abstract class PlayerGroundedState : PlayerMovementState
     private void Float()
     {
         PlayerController player = _movementStateMachine.Player;
-        BoxCollider collider = _movementStateMachine.Player.Collider;
+        CapsuleCollider collider = _movementStateMachine.Player.Collider;
 
         Ray ray = new Ray(player.transform.TransformPoint(collider.center), Vector3.down);
+        float castRadius = _movementStateMachine.Player.Collider.radius;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, player.FloatingGroundDetectionRange, player.GroundCheckLayerMask, QueryTriggerInteraction.Ignore))
+        if (Physics.SphereCast(ray.origin, castRadius, ray.direction, out RaycastHit hit, player.FloatingGroundDetectionRange, player.GroundCheckLayerMask, QueryTriggerInteraction.Ignore))
         {
             Vector3 vel = player.Rigidbody.linearVelocity;
             Vector3 rayDir = Vector3.down;

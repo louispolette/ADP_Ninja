@@ -27,6 +27,8 @@ public class PlayerMovementStateMachine : StateMachine
 
     public bool IsGrounded { get; set; } = false;
     public bool IsJumping { get; set; } = false;
+    public bool HasBufferedJump { get; set; } = false;
+    public float LastBufferTime { get; set; } = -1f;
     public bool HasJumpInputReleasedInJump { get; set; } = false;
     public bool HasJumpBeenCanceled { get; set; } = false;
     public bool HasBufferedJumpCancel { get; set; } = false;

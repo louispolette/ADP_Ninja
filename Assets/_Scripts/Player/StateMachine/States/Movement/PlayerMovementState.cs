@@ -16,6 +16,7 @@ public abstract class PlayerMovementState : State
     protected virtual float AirDeceleration => _movementStateMachine.Player.AirDeceleration;
     protected virtual float AirAcceleration => _movementStateMachine.Player.AirAcceleration;
     protected virtual float JumpCancelExtraGravity => _movementStateMachine.Player.JumpCancelExtraGravity;
+    protected virtual float JumpBufferDuration => _movementStateMachine.Player.JumpBufferDuration;
 
     protected float GroundCheckWidth => _movementStateMachine.Player.GroundCheckWidth;
     protected float GroundCheckYOrigin => _movementStateMachine.Player.GroundCheckYOrigin;
@@ -112,8 +113,20 @@ public abstract class PlayerMovementState : State
 
     protected virtual void OnJumpInputPressed(InputAction.CallbackContext context)
     {
-        TryJump();
+        bool jumpWasSuccessful = TryJump();
+
+        if (!jumpWasSuccessful)
+        {
+            BufferJump();
+        }
     }
+
+    private void BufferJump()
+    {
+        _movementStateMachine.HasBufferedJump = true;
+        _movementStateMachine.LastBufferTime = Time.time;
+    }
+
     #endregion
 
     #region horizontal movement
@@ -127,7 +140,6 @@ public abstract class PlayerMovementState : State
 
         UpdateTargetRotation(MovementDirection);
 
-        // Player stops immediatly for some reason
         if (!moveInputIsZero)
         {
             RotateTowardsTargetRotation();
@@ -265,12 +277,15 @@ public abstract class PlayerMovementState : State
         _movementStateMachine.Player.Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
     }
 
-    protected void TryJump()
+    protected bool TryJump(bool isBufferedJump = false)
     {
-        if (!_movementStateMachine.IsJumping && GroundCheck())
+        if ((!_movementStateMachine.IsJumping || isBufferedJump) && GroundCheck())
         {
             InitiateJumpPrep();
+            return true;
         }
+
+        return false;
     }
 
     protected void InitiateJumpPrep()
@@ -297,8 +312,26 @@ public abstract class PlayerMovementState : State
 
     protected void OnLand()
     {
+        bool hasUsedBufferedJump = HandleBufferedJumps();
+
+        if (hasUsedBufferedJump) return;
+
         CameraController.Instance.TrackingTarget.StopJumpingMode();
         SetAnimatorLand();
+    }
+
+    protected bool HandleBufferedJumps()
+    {
+        if (_movementStateMachine.HasBufferedJump && Time.time - _movementStateMachine.LastBufferTime <= JumpBufferDuration)
+        {
+            if (TryJump(isBufferedJump: true)) // Jump animation trigger doesn't happen because can't transition into self
+            {
+                _movementStateMachine.HasBufferedJump = false;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     #endregion
