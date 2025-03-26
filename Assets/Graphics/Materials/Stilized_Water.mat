@@ -98,7 +98,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Amount: 0.54
+    - _Amount: 1.87
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -111,9 +111,9 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FoamCutOff: 4.75
-    - _FoamScale: 7.46
-    - _FromSpeed: 0.65
+    - _FoamCutOff: 10.7
+    - _FoamScale: 80.12
+    - _FromSpeed: 4.36
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -132,7 +132,7 @@ Material:
     - _Water_depth: 0.5
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _refraction: -0.28
+    - _refraction: 0.23
     - _refraction_scale: 3.84
     - _refraction_speed: 0.24
     m_Colors:

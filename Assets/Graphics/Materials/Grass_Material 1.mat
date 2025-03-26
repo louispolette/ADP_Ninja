@@ -48,13 +48,13 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: -0.01
-    - _Smoothness: -0.18
-    - _Speed: 0.71
+    - _Scale: 0.06
+    - _Smoothness: 2.3
+    - _Speed: 0.53
     - _Transform: 0
     - _alpha_text_1: 0
     m_Colors:
-    - _Albedo: {r: 0.5126895, g: 1, b: 0, a: 0}
+    - _Albedo: {r: 0.5137255, g: 1, b: 0, a: 0}
     - _Transform_text: {r: 1, g: 1, b: 0, a: 0}
     - _test: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
