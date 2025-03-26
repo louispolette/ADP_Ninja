@@ -3,27 +3,7 @@ guid: 7374c2f6bb943f54ea1b7403699657e3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Details
-    second: {fileID: 2100000, guid: 932f34005c15352478920202a7e191d9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Top
-    second: {fileID: 2100000, guid: bba454bac07417e48b8a225ff92a5324, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WellTube
-    second: {fileID: 2100000, guid: e3974c2afcb0e0442bca6ce51533c8b1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wire
-    second: {fileID: 2100000, guid: 8fd247b0a5388df4395a77875b635423, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
