@@ -64,7 +64,7 @@ public abstract class PlayerAirborneState : PlayerMovementState
 
         if (GroundCheck())
         {
-            Land();
+            OnLand();
             _movementStateMachine.ChangeState(GetGroundedState());
         }
     }

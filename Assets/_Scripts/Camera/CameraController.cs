@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CinemachineCamera))]
-public class CameraEffectController : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance { get; private set; }
+
     [field: Space]
 
     [field: SerializeField] public float SprintFOVMultiplier { get; private set; } = 1.25f;
@@ -23,7 +25,8 @@ public class CameraEffectController : MonoBehaviour
 
     private Coroutine _sprintFOVChangeCoroutine;
 
-    private CinemachineCamera _cinemachineCamera;
+    public CinemachineCamera CinemachineCamera { get; private set; }
+    public PlayerCameraTrackingTarget TrackingTarget { get; set; }
 
     public float SprintFOV => _baseFOV * SprintFOVMultiplier;
 
@@ -45,8 +48,10 @@ public class CameraEffectController : MonoBehaviour
 
     private void Awake()
     {
-        _cinemachineCamera = GetComponent<CinemachineCamera>();
-        _baseFOV = _cinemachineCamera.Lens.FieldOfView;
+        Instance = this;
+
+        CinemachineCamera = GetComponent<CinemachineCamera>();
+        _baseFOV = CinemachineCamera.Lens.FieldOfView;
     }
 
     private void Start()
@@ -56,12 +61,6 @@ public class CameraEffectController : MonoBehaviour
             AddPlayerInputCallbacks();
         }
     }
-
-    private void Update()
-    {
-        
-    }
-
 
     public void EnableSprintEffect(InputAction.CallbackContext context)
     {
@@ -116,9 +115,10 @@ public class CameraEffectController : MonoBehaviour
                 sprintFOVLerpValue = Mathf.Clamp01(sprintFOVLerpValue);
 
                 float curveValue = SprintFOVChangeCurve.Evaluate(sprintFOVLerpValue);
-                _cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(_baseFOV, SprintFOV, curveValue);
+                CinemachineCamera.Lens.FieldOfView = Mathf.Lerp(_baseFOV, SprintFOV, curveValue);
                 yield return null;
             }
         }
     }
+
 }

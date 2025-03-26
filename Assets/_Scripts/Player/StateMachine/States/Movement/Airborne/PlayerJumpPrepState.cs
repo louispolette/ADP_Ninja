@@ -27,6 +27,7 @@ public class PlayerJumpPrepState : PlayerGroundedState
     {
         _movementStateMachine.IsJumping = true;
         _movementStateMachine.HasJumpBeenCanceled = false;
+        CameraController.Instance.TrackingTarget.StartJumpingMode();
     }
 
     private void ChangeToJumpingState()

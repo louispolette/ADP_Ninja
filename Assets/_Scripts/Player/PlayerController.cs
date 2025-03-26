@@ -4,8 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController Instance;
-
+    public static PlayerController Instance { get; private set; }
     #region exposed fields
 
     [field : Space]
@@ -51,7 +50,7 @@ public class PlayerController : MonoBehaviour
     [field: Header("References")]
 
     [field: SerializeField] public CinemachineInputAxisController CameraInput { get; private set; }
-    [field: SerializeField] public CameraEffectController CameraEffectController { get; private set; }
+    [field: SerializeField] public CameraController CameraEffectController { get; private set; }
 
 
     #endregion

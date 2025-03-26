@@ -261,7 +261,6 @@ public abstract class PlayerMovementState : State
 
     protected void DoJumpImpulse()
     {
-        Debug.Log("Jump Impulse");
         ResetVerticalVelocity();
         _movementStateMachine.Player.Rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
     }
@@ -296,8 +295,9 @@ public abstract class PlayerMovementState : State
         return hitObjects.Length > 0;
     }
 
-    protected void Land()
+    protected void OnLand()
     {
+        CameraController.Instance.TrackingTarget.StopJumpingMode();
         SetAnimatorLand();
     }
 
