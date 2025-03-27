@@ -48,10 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <TrackingTransform>k__BackingField: {fileID: 5483741698861567614}
   <LookAtTransform>k__BackingField: {fileID: 2196820980027980360}
-  <FollowOffset>k__BackingField: {x: 0, y: 0, z: 0}
-  <JumpFollowRatio>k__BackingField: 0
-  <JumpTrackingHeight>k__BackingField: 0.75
-  <JumpLookAtHeight>k__BackingField: -0.75
+  <FollowOffset>k__BackingField: {x: 0, y: 2, z: 0}
+  <JumpFollowRatio>k__BackingField: 1
+  <JumpTrackingHeight>k__BackingField: 0.25
+  <JumpLookAtHeight>k__BackingField: 0.25
   <HeightFollowSmoothTime>k__BackingField: 0.2
 --- !u!1 &861598099201137399
 GameObject:
