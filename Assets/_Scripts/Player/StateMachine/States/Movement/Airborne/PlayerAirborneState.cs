@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,9 +27,12 @@ public abstract class PlayerAirborneState : PlayerMovementState
         _movementStateMachine.IsGrounded = false;
         SetAnimatorAirborneState(true);
 
-        if (!_movementStateMachine.HasJumpBeenCanceled && _movementStateMachine.HasJumpInputReleasedInJump)
+        if (!_movementStateMachine.HasJumpBeenCanceled)
         {
-            CancelJump();
+            if (_movementStateMachine.HasJumpInputReleasedInJump || !_movementStateMachine.Player.JumpAction.IsPressed())
+            {
+                CancelJump();
+            }
         }
     }
 
@@ -64,8 +66,8 @@ public abstract class PlayerAirborneState : PlayerMovementState
 
         if (GroundCheck())
         {
-            OnLand();
             _movementStateMachine.ChangeState(GetGroundedState());
+            OnLand();
         }
     }
 

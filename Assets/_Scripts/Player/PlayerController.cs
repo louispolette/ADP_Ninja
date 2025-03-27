@@ -154,6 +154,8 @@ public class PlayerController : MonoBehaviour
         {
             PreviousMovementState = _movementStateMachine.PreviousState.Name;
         }
+
+        Debug.Log(JumpAction.IsPressed());
     }
 
     private void FixedUpdate()
