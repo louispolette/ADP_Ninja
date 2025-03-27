@@ -79,9 +79,6 @@
             "m_Id": "771502dfd2d54ee3b7308e2a6e720923"
         },
         {
-            "m_Id": "8b0f2b839be74230ab518ba150e89b05"
-        },
-        {
             "m_Id": "abf9568af38b44d889ba2c9aae66a01b"
         },
         {
@@ -607,9 +604,6 @@
             },
             {
                 "m_Id": "771502dfd2d54ee3b7308e2a6e720923"
-            },
-            {
-                "m_Id": "8b0f2b839be74230ab518ba150e89b05"
             }
         ]
     },
@@ -676,21 +670,6 @@
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "06e12edd3390461ea6983bd896007fe4",
-    "m_Id": 0,
-    "m_DisplayName": "Alpha Clip Threshold",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "AlphaClipThreshold",
-    "m_StageCapability": 2,
-    "m_Value": 0.5,
-    "m_DefaultValue": 0.5,
     "m_Labels": []
 }
 
@@ -937,12 +916,12 @@
         "m_Id": "6c7be34edb65412d8c46621108e081e9"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 0,
+    "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
     "m_RenderFace": 0,
-    "m_AlphaClip": true,
+    "m_AlphaClip": false,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
     "m_DisableTint": false,
@@ -1591,10 +1570,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1390.6668701171875,
-            "y": -16.666704177856447,
-            "width": 110.0001220703125,
-            "height": 36.00004577636719
+            "x": -896.6666870117188,
+            "y": -140.66668701171876,
+            "width": 110.0,
+            "height": 36.00001525878906
         }
     },
     "m_Slots": [
@@ -2031,10 +2010,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -996.666748046875,
-            "y": -140.6666717529297,
+            "x": -1070.666748046875,
+            "y": -136.6666717529297,
             "width": 105.3333740234375,
-            "height": 36.000038146972659
+            "height": 36.00001525878906
         }
     },
     "m_Slots": [
@@ -2797,40 +2776,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "8b0f2b839be74230ab518ba150e89b05",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "SurfaceDescription.AlphaClipThreshold",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "06e12edd3390461ea6983bd896007fe4"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedDescriptor": "SurfaceDescription.AlphaClipThreshold"
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.NormalMaterialSlot",
     "m_ObjectId": "8cadcce595e64b3f88c2ac88f9296f19",
     "m_Id": 0,
@@ -3333,10 +3278,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -230.1215057373047,
-            "y": 357.9670104980469,
-            "width": 0.0,
-            "height": 0.0
+            "x": -234.6666717529297,
+            "y": 411.3333740234375,
+            "width": 141.33334350585938,
+            "height": 35.999969482421878
         }
     },
     "m_Slots": [
@@ -4186,8 +4131,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -996.0,
-            "y": 369.9999694824219,
+            "x": -970.0,
+            "y": 406.0000305175781,
             "width": 209.3333740234375,
             "height": 438.6665954589844
         }

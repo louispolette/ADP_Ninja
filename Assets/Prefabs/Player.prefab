@@ -61,12 +61,13 @@ MonoBehaviour:
   <SprintSpeedMultiplier>k__BackingField: 1.3
   <CrouchSpeedMultiplier>k__BackingField: 0.5
   <RunningThreshold>k__BackingField: 0.75
-  <TurningSmoothTime>k__BackingField: 0.1
+  <TurningSmoothTime>k__BackingField: 0
   <JumpForce>k__BackingField: 9
   <AirDeceleration>k__BackingField: 2.5
   <AirAcceleration>k__BackingField: 4
   <JumpCancelExtraGravity>k__BackingField: 0.5
   <MinimumVelocityForJumpCancel>k__BackingField: 3
+  <JumpBufferDuration>k__BackingField: 0.15
   <GroundCheckWidth>k__BackingField: 0.4
   <GroundCheckYOrigin>k__BackingField: 0.25
   <GroundCheckLayerMask>k__BackingField:

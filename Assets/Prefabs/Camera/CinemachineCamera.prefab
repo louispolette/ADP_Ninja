@@ -59,9 +59,9 @@ MonoBehaviour:
   Target:
     TrackingTarget: {fileID: 0}
     LookAtTarget: {fileID: 0}
-    CustomLookAtTarget: 0
+    CustomLookAtTarget: 1
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 60.00005
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -95,7 +95,7 @@ MonoBehaviour:
   TargetOffset: {x: 0, y: 0, z: 0}
   TrackerSettings:
     BindingMode: 4
-    PositionDamping: {x: 0, y: 0.5, z: 0}
+    PositionDamping: {x: 0, y: 0, z: 0}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
@@ -103,15 +103,15 @@ MonoBehaviour:
   Radius: 10
   Orbits:
     Top:
-      Radius: 1.5
-      Height: 5
+      Radius: 1.33
+      Height: 2.82
     Center:
-      Radius: 2.5
-      Height: 2.25
+      Radius: 3.47
+      Height: -0.43
     Bottom:
-      Radius: 3
-      Height: 0
-    SplineCurvature: 0.5
+      Radius: 1
+      Height: -1.7
+    SplineCurvature: 1
   RecenteringTarget: 2
   HorizontalAxis:
     Value: 0
@@ -156,17 +156,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Composition:
-    ScreenPosition: {x: -0.1, y: 0.14}
+    ScreenPosition: {x: 0, y: 0}
     DeadZone:
       Enabled: 0
-      Size: {x: 0.2, y: 0.2}
+      Size: {x: 0, y: 0}
     HardLimits:
       Enabled: 0
-      Size: {x: 0.8, y: 0.8}
+      Size: {x: 0, y: 0.06}
       Offset: {x: 0, y: 0}
-  CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 1.25, z: 0}
-  Damping: {x: 0, y: 0.5}
+  CenterOnActivate: 0
+  TargetOffset: {x: 0, y: 0, z: 0}
+  Damping: {x: 0, y: 0.07}
   Lookahead:
     Enabled: 0
     Time: 0.05
