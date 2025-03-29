@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1863968518566958677}
   - component: {fileID: 5951872392038085830}
   - component: {fileID: 1440961710086106206}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: battans
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2586224972343061368}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1060797920521684577}
   - component: {fileID: 3786946003260712822}
   - component: {fileID: 2320378657755670129}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: piliers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4008839280214873144}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 488588138041316116}
   - component: {fileID: 4826833939700286042}
   - component: {fileID: 5034911116738873312}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 8055704369457684695}
   - component: {fileID: 5782220289180700296}
   - component: {fileID: 2213281001868229761}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: poutre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 1029513178521528436}
   - component: {fileID: 6256163581046124423}
   - component: {fileID: 2517649082981693666}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: toit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 7593022521141361001}
   - component: {fileID: 7327821061836459058}
   - component: {fileID: 9152833054138051347}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: marche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
