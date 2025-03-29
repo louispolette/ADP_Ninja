@@ -10,6 +10,7 @@ public class PlayerRunningState : PlayerMovingState
     {
         base.OnEnter();
 
+        SetAnimatorRunningState(true);
         _movementStateMachine.SpeedModifier = 1f;
     }
 
@@ -18,6 +19,13 @@ public class PlayerRunningState : PlayerMovingState
         base.OnUpdate();
 
         CheckMovementInput();
+    }
+
+    protected override void OnExit()
+    {
+        base.OnExit();
+
+
     }
 
     private void CheckMovementInput()

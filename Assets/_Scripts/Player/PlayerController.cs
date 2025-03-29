@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float BaseMovementSpeed { get; private set; } = 5f;
     [field: SerializeField] public float Acceleration { get; private set; } = 1f;
     [field: SerializeField] public float Deceleration { get; private set; } = 1f;
+    [field: SerializeField] public float WalkSpeedMultiplier { get; private set; } = 0.75f;
     [field: SerializeField] public float SprintSpeedMultiplier { get; private set; } = 1.5f;
     [field: SerializeField] public float CrouchSpeedMultiplier { get; private set; } = 0.5f;
     [field: SerializeField] public float RunningThreshold { get; private set; }
@@ -154,8 +155,6 @@ public class PlayerController : MonoBehaviour
         {
             PreviousMovementState = _movementStateMachine.PreviousState.Name;
         }
-
-        Debug.Log(JumpAction.IsPressed());
     }
 
     private void FixedUpdate()

@@ -8,8 +8,7 @@ public abstract class PlayerMovementState : State
 
     protected float RunningThreshold => _movementStateMachine.Player.RunningThreshold;
     protected float TargetSpeed =>   _movementStateMachine.Player.BaseMovementSpeed
-                                     * _movementStateMachine.SpeedModifier
-                                     * _movementStateMachine.MovementInput.magnitude;
+                                     * _movementStateMachine.SpeedModifier;
     protected virtual float Acceleration => _movementStateMachine.Player.Acceleration;
     protected virtual float Deceleration => _movementStateMachine.Player.Deceleration;
     protected virtual float JumpForce => _movementStateMachine.Player.JumpForce;
@@ -153,6 +152,11 @@ public abstract class PlayerMovementState : State
 
         if (TargetSpeed >= currentHorizontalVelocity.magnitude)
         {
+            if (moveInputIsZero)
+            {
+                return;
+            }
+
             force = velDiff * Acceleration;
         }
         else
@@ -161,9 +165,6 @@ public abstract class PlayerMovementState : State
         }
 
         _movementStateMachine.Player.Rigidbody.AddForce(force, ForceMode.Acceleration);
-
-        //_movementStateMachine.Player.Rigidbody.AddForce(targetRotationDirection * MovementSpeed - currentHorizontalVelocity,
-                                                        //ForceMode.VelocityChange);
     }
 
     protected Vector3 GetHorizontalVelocity()

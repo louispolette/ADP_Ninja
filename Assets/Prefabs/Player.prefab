@@ -55,13 +55,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CurrentMovementState>k__BackingField: None
   <PreviousMovementState>k__BackingField: None
-  <BaseMovementSpeed>k__BackingField: 9
+  <BaseMovementSpeed>k__BackingField: 8
   <Acceleration>k__BackingField: 7.5
   <Deceleration>k__BackingField: 19
+  <WalkSpeedMultiplier>k__BackingField: 0.25
   <SprintSpeedMultiplier>k__BackingField: 1.3
-  <CrouchSpeedMultiplier>k__BackingField: 0.5
+  <CrouchSpeedMultiplier>k__BackingField: 0.2
   <RunningThreshold>k__BackingField: 0.9
-  <TurningSmoothTime>k__BackingField: 0
+  <TurningSmoothTime>k__BackingField: 0.05
   <JumpForce>k__BackingField: 9
   <AirDeceleration>k__BackingField: 2.5
   <AirAcceleration>k__BackingField: 4
