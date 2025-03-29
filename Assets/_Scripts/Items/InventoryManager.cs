@@ -81,16 +81,16 @@ public class InventoryManager : MonoBehaviour
         }
     }
     
-    public bool HasItem(ItemData itemData)
+    public bool HasItem(int itemID)
     {
-        InventoryItem inventoryItem = SearchForItemInInventory(itemData.itemID);
+        InventoryItem inventoryItem = SearchForItemInInventory(itemID);
 
         return inventoryItem != null && inventoryItem.amount >= 1;
     }
 
-    public bool HasItem(ItemData itemData, int requiredAmount)
+    public bool HasItem(int itemID, int requiredAmount)
     {
-        InventoryItem inventoryItem = SearchForItemInInventory(itemData.itemID);
+        InventoryItem inventoryItem = SearchForItemInInventory(itemID);
 
         return inventoryItem != null && inventoryItem.amount >= requiredAmount;
     }

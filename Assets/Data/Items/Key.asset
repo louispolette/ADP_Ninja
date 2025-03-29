@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Key
   m_EditorClassIdentifier: 
   label: Key
-  itemID: 0
+  itemID: 1
   icon: {fileID: 2800000, guid: 3d18ea021010e1b47bfc17616ad4dff6, type: 3}
   description: A key that opens a door somewhere

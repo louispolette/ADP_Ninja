@@ -45,7 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIController: {fileID: 0}
-  <Content>k__BackingField:
-  - itemData: {fileID: 11400000, guid: fe8d83b8bf1cb7b4b82fbcc2237344eb, type: 2}
-    amount: 2
+  <Content>k__BackingField: []
   testItem: {fileID: 11400000, guid: fe8d83b8bf1cb7b4b82fbcc2237344eb, type: 2}

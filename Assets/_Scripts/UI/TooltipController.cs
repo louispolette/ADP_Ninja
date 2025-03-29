@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class TooltipController : MonoBehaviour
@@ -15,6 +16,7 @@ public class TooltipController : MonoBehaviour
 
     private CanvasGroup _canvasGroup;
     private RectTransform _rectTransform;
+    private TextMeshProUGUI _text;
 
     public Action<TooltipController> onTooltipFullyFadedOut;
 
@@ -33,11 +35,17 @@ public class TooltipController : MonoBehaviour
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
+        _text = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Start()
     {
         FadeIn();
+    }
+
+    public void SetText(string newText)
+    {
+        _text.text = newText;
     }
 
     public void FadeOut()

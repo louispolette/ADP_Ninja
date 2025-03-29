@@ -2,14 +2,9 @@ using UnityEngine;
 
 public class CollectibleController : MonoBehaviour, IInteractable
 {
-    [field : Space]
+    [field: Space]
 
-    [field : SerializeField] public bool Usable { get; set; } = true;
-    [field: SerializeField] public bool SpawnTooltips { get; set; } = true;
-
-    [field : Space]
-
-    [field : SerializeField] public Transform TooltipOrigin { get; private set; }
+    [field: SerializeField] public bool Usable { get; set; } = true;
 
     [field: Space]
 
@@ -18,7 +13,7 @@ public class CollectibleController : MonoBehaviour, IInteractable
     private Renderer _renderer;
     private Collider _collider;
 
-    private TooltipController _createdTooltip;
+    private TooltipSpawner _tooltipSpawner;
 
     public const string TOOLTIP_TEXT = "Collect";
 
@@ -26,6 +21,7 @@ public class CollectibleController : MonoBehaviour, IInteractable
     {
         _renderer = GetComponentInChildren<Renderer>();
         _collider = GetComponentInChildren<Collider>();
+        _tooltipSpawner = GetComponent<TooltipSpawner>();
     }
 
     public void Interact()
@@ -35,37 +31,20 @@ public class CollectibleController : MonoBehaviour, IInteractable
 
     public void OnEnterInteractionRange()
     {
-        SpawnTooltip();
+        _tooltipSpawner.SpawnTooltip();
     }
 
     public void OnExitInteractionRange()
     {
-        RemoveTooltip();
-    }
-
-    private void SpawnTooltip()
-    {
-        if (!SpawnTooltips) return;
-
-        Transform tooltipLocation = (TooltipOrigin != null) ? TooltipOrigin : transform;
-        TooltipInfo newTooltip = new TooltipInfo(TooltipType.Interact, tooltipLocation, TOOLTIP_TEXT);
-        _createdTooltip = WorldspaceTooltips.CreateTooltip(newTooltip);
-    }
-
-    private void RemoveTooltip()
-    {
-        if (_createdTooltip == null) return;
-
-        WorldspaceTooltips.RemoveTooltip(_createdTooltip);
-        _createdTooltip = null;
+        _tooltipSpawner.RemoveTooltip();
     }
 
     private void Collect()
     {
         InventoryManager.Instance.AddItem(ItemData);
 
-        RemoveTooltip();
-        SpawnTooltips = false;
+        _tooltipSpawner.RemoveTooltip();
+        _tooltipSpawner.SpawnTooltips = false;
         Usable = false;
         _renderer.enabled = false;
         _collider.enabled = false;

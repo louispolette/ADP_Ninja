@@ -19,6 +19,7 @@ public class WorldspaceTooltipHandler : MonoBehaviour
     public TooltipController CreateTooltip(TooltipInfo tooltipInfo)
     {
         var newTooltip = Instantiate(TooltipPrefab, transform, false);
+        newTooltip.SetText(tooltipInfo.text);
         _tooltips.Add(newTooltip);
         
         var worldSpaceIcon = newTooltip.GetComponent<WorldspaceIcon>();

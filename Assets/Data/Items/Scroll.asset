@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d06ce798c813a48adffda8b1138055, type: 3}
   m_Name: Scroll
   m_EditorClassIdentifier: 
-  label: 
+  label: Scroll
   itemID: 0
   icon: {fileID: 0}
   description: 
