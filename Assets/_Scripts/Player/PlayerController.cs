@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCloseMenuInput(InputAction.CallbackContext context) => CloseMenu();
 
-    private void ResetInput()
+    private void ResetMovementInput()
     {
         MovementInput = Vector2.zero;
     }
@@ -235,19 +235,29 @@ public class PlayerController : MonoBehaviour
 
     public void OpenMenu()
     {
-        ResetInput();
-        CameraInput.enabled = false;
+        ResetMovementInput();
 
-        Input.currentActionMap = Input.currentActionMap = UIActionMap;
+        SwitchToUIInput();
         InventoryManager.Instance.ShowInventoryUI();
     }
 
     public void CloseMenu()
     {
-        CameraInput.enabled = true;
-
-        Input.currentActionMap = Input.currentActionMap = PlayerActionMap;
+        SwitchToPlayerInput();
         InventoryManager.Instance.HideInventoryUI();
+    }
+
+    [ContextMenu("UI Input")]
+    public void SwitchToUIInput()
+    {
+        Input.SwitchCurrentActionMap(UIActionMap.name);
+        CameraInput.enabled = false;
+    }
+
+    public void SwitchToPlayerInput()
+    {
+        Input.SwitchCurrentActionMap(PlayerActionMap.name);
+        CameraInput.enabled = true;
     }
 
     private void OnDrawGizmosSelected()
