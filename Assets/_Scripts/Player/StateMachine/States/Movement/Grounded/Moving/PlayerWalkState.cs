@@ -10,6 +10,7 @@ public class PlayerWalkState : PlayerMovingState
     {
         base.OnEnter();
 
+        SetAnimatorRunningState(false);
         _movementStateMachine.SpeedModifier = 1f;
     }
 

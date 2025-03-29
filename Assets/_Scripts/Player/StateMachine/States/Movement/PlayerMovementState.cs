@@ -57,7 +57,7 @@ public abstract class PlayerMovementState : State
     {
         base.OnUpdate();
 
-        SetAnimatorVelocity(_movementStateMachine.Player.MovementInput.magnitude);
+        SetAnimatorMovementInput(_movementStateMachine.Player.MovementInput.magnitude);
     }
 
     protected override void OnPhysicsUpdate()
@@ -338,13 +338,13 @@ public abstract class PlayerMovementState : State
 
     #region animation
 
-    protected void SetAnimatorVelocity(float newValue)
+    protected void SetAnimatorMovementInput(float newValue)
     {
-        _movementStateMachine.Player.Animator.SetFloat(_movementStateMachine.Player.AnimationHandler.ParamHorizontalSpeed, newValue);
+        _movementStateMachine.Player.Animator.SetFloat(_movementStateMachine.Player.AnimationHandler.ParamMovementInput, newValue);    }
 
-        /*Vector3 vel = _movementStateMachine.Player.Rigidbody.linearVelocity;
-        float horizontalVelocityMag = new Vector3(vel.x, 0f, vel.z).magnitude;
-        _movementStateMachine.Player.Animator.SetFloat(_movementStateMachine.Player.AnimatorParamVelocity, horizontalVelocityMag);*/
+    protected void SetAnimatorRunningState(bool newValue)
+    {
+        _movementStateMachine.Player.Animator.SetBool(_movementStateMachine.Player.AnimationHandler.ParamIsRunning, newValue);
     }
 
     protected void SetAnimatorCrouchedState(bool newValue)
