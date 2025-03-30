@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     public bool MissionCompleted { get; private set; } = false;
     public bool QuittingGame { get; private set; } = false;
 
+    public const string MAIN_MENU_SCENE_NAME = "Main menu";
+    public const string END_SCREEN_SCENE_NAME = "";
+
     private void Awake()
     {
         Instance = this;
@@ -32,17 +35,23 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GameSequence());
     }
 
-    public void MissionComplete()
-    {
-        MissionCompleted = true;
-    }
-
     [ContextMenu("Quit Game")]
     public void QuitGame()
     {
+        QuittingGame = true;
+        ChangeScene(MAIN_MENU_SCENE_NAME);
+    }
+
+    public void MissionComplete()
+    {
+        MissionCompleted = true;
+        ChangeScene(END_SCREEN_SCENE_NAME);
+    }
+
+    public void ChangeScene(string sceneName)
+    {
         if (QuittingGame) return;
 
-        QuittingGame = true;
         Player.DisableInput();
         StartCoroutine(QuitGameCoroutine());
 
@@ -51,11 +60,11 @@ public class GameManager : MonoBehaviour
             BlackFadeController.Instance.FadeIn();
             yield return new WaitForSeconds(BlackFadeController.Instance.FadeDuration);
 
-            LoadMainMenu();
+            LoadScene(sceneName);
         }
     }
 
-    private void LoadMainMenu()
+    private void LoadScene(string sceneName)
     {
         SceneManager.LoadScene("Main menu");
     }
@@ -80,8 +89,10 @@ public class GameManager : MonoBehaviour
 
             Player.EnableInput();
             IntroUIController.Instance.Hide();
-
-            yield return new WaitUntil(() => MissionCompleted);
+        }
+        else
+        {
+            BlackFadeController.Instance.FadeOut();
         }
         
 
