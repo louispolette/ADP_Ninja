@@ -441,8 +441,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: A key to open a door
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c2ef5823f60a6d34cb0ef95f6b73fce4, type: 2}
+  m_sharedMaterial: {fileID: 4981808032089950109, guid: c2ef5823f60a6d34cb0ef95f6b73fce4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -649,8 +649,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Key
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c2ef5823f60a6d34cb0ef95f6b73fce4, type: 2}
+  m_sharedMaterial: {fileID: 4981808032089950109, guid: c2ef5823f60a6d34cb0ef95f6b73fce4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1337,23 +1337,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1577097277752541913, guid: 57dc2804069b8a74bb837930005f6274, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1577097277752541913, guid: 57dc2804069b8a74bb837930005f6274, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1577097277752541913, guid: 57dc2804069b8a74bb837930005f6274, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1577097277752541913, guid: 57dc2804069b8a74bb837930005f6274, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 1577097277752541913, guid: 57dc2804069b8a74bb837930005f6274, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -37.5
       objectReference: {fileID: 0}
     - target: {fileID: 2296763148659857489, guid: 57dc2804069b8a74bb837930005f6274, type: 3}
       propertyPath: m_Pivot.x
@@ -1453,7 +1453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7956674707748835277, guid: 57dc2804069b8a74bb837930005f6274, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 127.68
       objectReference: {fileID: 0}
     - target: {fileID: 7956674707748835277, guid: 57dc2804069b8a74bb837930005f6274, type: 3}
       propertyPath: m_SizeDelta.y

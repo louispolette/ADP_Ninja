@@ -6,6 +6,11 @@ public class KeyDoorController : MonoBehaviour, IInteractable
 
     [field: SerializeField] public Collider DoorCollision { get; private set; }
 
+    [field: Space]
+
+    [field: SerializeField] public AudioClip DoorLockedSound { get; private set; }
+    [field: SerializeField] public AudioClip DoorOpenSound { get; private set; }
+
     public bool Usable { get; set; } = true;
 
     public bool IsOpen { get; private set; } = false;
@@ -29,9 +34,11 @@ public class KeyDoorController : MonoBehaviour, IInteractable
         {
             OpenDoor();
         }
+        else
+        {
+            FailOpenDoor();
+        }
     }
-
-
 
     public void OnEnterInteractionRange()
     {
@@ -50,5 +57,12 @@ public class KeyDoorController : MonoBehaviour, IInteractable
         _tooltipSpawner.RemoveTooltip();
         _tooltipSpawner.SpawnTooltips = false;
         _animator.SetTrigger("openDoor");
+        AudioSource.PlayClipAtPoint(DoorOpenSound, transform.position, 1f);
+    }
+
+    private void FailOpenDoor()
+    {
+        InnerDialogueController.Instance.ShowDialogue("The door is locked", 3f);
+        AudioSource.PlayClipAtPoint(DoorLockedSound, transform.position, 1f);
     }
 }

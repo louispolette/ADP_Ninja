@@ -19,9 +19,9 @@ public class AltarChestController : MonoBehaviour, IInteractable
     {
         if (!Usable) return;
 
-        AudioSource.PlayClipAtPoint(InteractSound, transform.position, 1f);
         GameManager.Instance.MissionComplete();
         _tooltipSpawner.RemoveTooltip();
+        AudioSource.PlayClipAtPoint(InteractSound, transform.position, 1f);
     }
 
     public void OnEnterInteractionRange()

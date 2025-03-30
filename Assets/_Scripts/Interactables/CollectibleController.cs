@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CollectibleController : MonoBehaviour, IInteractable
@@ -14,6 +15,8 @@ public class CollectibleController : MonoBehaviour, IInteractable
     private Collider _collider;
 
     private TooltipSpawner _tooltipSpawner;
+
+    public Action OnCollect { get; set; }
 
     private void Awake()
     {
@@ -46,6 +49,8 @@ public class CollectibleController : MonoBehaviour, IInteractable
         Usable = false;
         _renderer.enabled = false;
         _collider.enabled = false;
+        OnCollect?.Invoke();
+        InnerDialogueController.Instance.ShowDialogue($"{ItemData.name} added to inventory, press START to open", 5f);
         Destroy(gameObject, 1f);
     }
 }
