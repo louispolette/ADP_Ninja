@@ -15,4 +15,4 @@ MonoBehaviour:
   label: Scroll
   itemID: 2
   icon: {fileID: 2800000, guid: dc35f4332689aa146a867b240278221d, type: 3}
-  description: 
+  description: The mission scroll, i need to get those war plans...
