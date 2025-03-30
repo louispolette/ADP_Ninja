@@ -231,6 +231,17 @@ public class PlayerController : MonoBehaviour
         MovementInput = Vector2.zero;
     }
 
+    public void DisableInput()
+    {
+        Input.DeactivateInput();
+        ResetMovementInput();
+    }
+
+    public void EnableInput()
+    {
+        Input.ActivateInput();
+    }
+
     #endregion
 
     public void OpenMenu()
