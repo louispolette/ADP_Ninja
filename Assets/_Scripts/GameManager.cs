@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public bool QuittingGame { get; private set; } = false;
 
     public const string MAIN_MENU_SCENE_NAME = "Main menu";
-    public const string END_SCREEN_SCENE_NAME = "";
+    public const string END_SCREEN_SCENE_NAME = "EndScene";
 
     private void Awake()
     {
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene("Main menu");
+        SceneManager.LoadScene(sceneName);
     }
 
     private IEnumerator GameSequence()

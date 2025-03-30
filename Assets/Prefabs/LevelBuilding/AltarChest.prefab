@@ -447,6 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ecdf321b73494d4bbfc142acb808eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InteractSound: {fileID: 8300000, guid: 4ae6d1feb3efb15498927d0128bde63c, type: 3}
 --- !u!114 &7040309871254427041
 MonoBehaviour:
   m_ObjectHideFlags: 0

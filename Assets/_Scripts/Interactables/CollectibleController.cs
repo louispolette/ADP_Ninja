@@ -10,6 +10,7 @@ public class CollectibleController : MonoBehaviour, IInteractable
     [field: Space]
 
     [field : SerializeField] public ItemData ItemData { get; private set; }
+    [field: SerializeField] public AudioClip CollectSFX { get; private set; }
 
     private Renderer _renderer;
     private Collider _collider;
@@ -40,6 +41,11 @@ public class CollectibleController : MonoBehaviour, IInteractable
         _tooltipSpawner.RemoveTooltip();
     }
 
+    private void PlayCollectSFX()
+    {
+        AudioSource.PlayClipAtPoint(CollectSFX, transform.position, 1f);
+    }
+
     private void Collect()
     {
         InventoryManager.Instance.AddItem(ItemData);
@@ -51,6 +57,7 @@ public class CollectibleController : MonoBehaviour, IInteractable
         _collider.enabled = false;
         OnCollect?.Invoke();
         InnerDialogueController.Instance.ShowDialogue($"{ItemData.name} added to inventory, press START to open", 5f);
+        PlayCollectSFX();
         Destroy(gameObject, 1f);
     }
 }

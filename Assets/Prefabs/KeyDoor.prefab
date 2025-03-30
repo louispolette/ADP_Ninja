@@ -253,6 +253,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DoorCollision>k__BackingField: {fileID: 5266285574187210656}
+  <DoorLockedSound>k__BackingField: {fileID: 8300000, guid: c4c900838df6ac64c94bf911a3b95ede, type: 3}
+  <DoorOpenSound>k__BackingField: {fileID: 8300000, guid: 0475ac73d2e81f5489595b4ced183c3a, type: 3}
 --- !u!114 &8197706787434912572
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -32,6 +32,7 @@ public class PlayerJumpPrepState : PlayerGroundedState
 
     private void ChangeToJumpingState()
     {
+        _movementStateMachine.Player.DoJumpSFX();
         JumpInitialize();
         _movementStateMachine.ChangeState(_movementStateMachine.FallState);
         DoJumpImpulse();

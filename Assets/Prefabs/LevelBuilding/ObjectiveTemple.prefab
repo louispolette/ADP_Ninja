@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7728852073879638649}
   - component: {fileID: 3567678923046307537}
   - component: {fileID: 8707932764455939854}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4085558549615833948}
   - component: {fileID: 8351478145749847642}
   - component: {fileID: 921469748074206860}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Poteaux
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 2626396218678249322}
   - component: {fileID: 7888813141424519991}
   - component: {fileID: 5791958154972029552}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Toit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +650,7 @@ GameObject:
   - component: {fileID: 2003825861982923496}
   - component: {fileID: 6665737582293040043}
   - component: {fileID: 6163395402881977285}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -808,7 +808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9190921027115904218}
   - component: {fileID: 4273810503997524520}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}

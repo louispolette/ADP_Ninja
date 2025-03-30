@@ -9,6 +9,7 @@ public class BlackFadeController : MonoBehaviour
     [field: Space]
 
     [field: SerializeField] public float FadeDuration { get; private set; } = 1.5f;
+    [field: SerializeField] public bool FadeOutOnStart { get; private set; } = false;
 
     public RawImage BlackScreen { get; private set; }
 
@@ -21,6 +22,14 @@ public class BlackFadeController : MonoBehaviour
         BlackScreen = GetComponentInChildren<RawImage>();
 
         SetBlackScreenOpacity(1f);
+    }
+
+    private void Start()
+    {
+        if (FadeOutOnStart)
+        {
+            FadeOut();
+        }
     }
 
     [ContextMenu("FadeOut")]

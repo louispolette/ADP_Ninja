@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <FadeDuration>k__BackingField: 1.5
+  <FadeOutOnStart>k__BackingField: 0

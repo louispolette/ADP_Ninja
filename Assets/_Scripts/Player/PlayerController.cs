@@ -52,6 +52,10 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float SpringStrength { get; private set; } = 1f;
     [field: SerializeField] public float SpringDamper { get; private set; } = 1f;
 
+    [field: Header("SFX")]
+
+    [field: SerializeField] public AudioClip JumpSFX { get; private set; }
+
     [field: Header("References")]
 
     [field: SerializeField] public CinemachineInputAxisController CameraInput { get; private set; }
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour
     public CapsuleCollider Collider { get; private set; }
     public PlayerInteractionHandler InteractionHandler { get; private set; }
     public PlayerAnimationHandler AnimationHandler { get; private set; }
+    public AudioSource PlayerAudioSource { get; private set; }
     #endregion
 
     #region input caching
@@ -105,6 +110,7 @@ public class PlayerController : MonoBehaviour
         Collider = GetComponentInChildren<CapsuleCollider>();
         InteractionHandler = GetComponentInChildren<PlayerInteractionHandler>();
         AnimationHandler = GetComponent<PlayerAnimationHandler>();
+        PlayerAudioSource = GetComponentInChildren<AudioSource>();
 
         CameraTransform = Camera.main.transform;
 
@@ -269,6 +275,11 @@ public class PlayerController : MonoBehaviour
     {
         Input.SwitchCurrentActionMap(PlayerActionMap.name);
         CameraInput.enabled = true;
+    }
+
+    public void DoJumpSFX()
+    {
+        PlayerAudioSource.PlayOneShot(JumpSFX, 0.25f);
     }
 
     private void OnDrawGizmosSelected()

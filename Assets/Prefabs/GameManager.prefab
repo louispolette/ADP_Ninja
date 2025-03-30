@@ -45,3 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Player>k__BackingField: {fileID: 0}
+  <DebugEnabled>k__BackingField: 0
+  <TimeBeforeFadeOut>k__BackingField: 1
+  <IntroDuration>k__BackingField: 6
