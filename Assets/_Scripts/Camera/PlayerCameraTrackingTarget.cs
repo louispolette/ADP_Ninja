@@ -28,7 +28,7 @@ public class PlayerCameraTrackingTarget : MonoBehaviour
     private Vector3 _trackingSmoothVelocity;
     private Vector3 _lookAtSmoothVelocity;
 
-    private PointToFollow _pointToFollow;
+    private PointToFollow _pointToFollow = PointToFollow.Player;
 
     private enum PointToFollow
     {
@@ -113,7 +113,6 @@ public class PlayerCameraTrackingTarget : MonoBehaviour
 
         TrackingTransform.position = new Vector3(_targetTrackingPosition.x, trackingHeightSmoothed, _targetTrackingPosition.z);
         LookAtTransform.position = new Vector3(_targetLookAtPosition.x, lookAtHeightSmoothed, _targetLookAtPosition.z);
-
     }
 
     private void CopyRotation()
@@ -134,4 +133,22 @@ public class PlayerCameraTrackingTarget : MonoBehaviour
         IsInJumpMode = false;
         _pointToFollow = PointToFollow.Player;
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("Update Position")]
+    private void UpdatePositionEditor()
+    {
+        PlayerTransform = transform.parent;
+        FollowedTransform = PlayerTransform;
+
+        _targetTrackingPosition = GetNewTrackingPosition();
+        _targetLookAtPosition = GetNewLookAtPosition();
+
+        TrackingTransform.position = new Vector3(_targetTrackingPosition.x, _targetTrackingPosition.y, _targetTrackingPosition.z);
+        LookAtTransform.position = new Vector3(_targetLookAtPosition.x, _targetLookAtPosition.y, _targetLookAtPosition.z);
+
+        PlayerTransform = null;
+        FollowedTransform = null;
+    }
+#endif
 }

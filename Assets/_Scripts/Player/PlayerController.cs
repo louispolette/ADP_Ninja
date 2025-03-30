@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCloseMenuInput(InputAction.CallbackContext context) => CloseMenu();
 
-    private void ResetMovementInput()
+    public void ResetMovementInput()
     {
         MovementInput = Vector2.zero;
     }
