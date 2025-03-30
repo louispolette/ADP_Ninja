@@ -15,4 +15,4 @@ MonoBehaviour:
   label: Key
   itemID: 1
   icon: {fileID: 2800000, guid: b4df79b4e1189c64d8fc6cdc4bc1626a, type: 3}
-  description: A key that opens a door somewhere
+  description: 

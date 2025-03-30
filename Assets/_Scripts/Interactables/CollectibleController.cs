@@ -15,8 +15,6 @@ public class CollectibleController : MonoBehaviour, IInteractable
 
     private TooltipSpawner _tooltipSpawner;
 
-    public const string TOOLTIP_TEXT = "Collect";
-
     private void Awake()
     {
         _renderer = GetComponentInChildren<Renderer>();
@@ -48,6 +46,6 @@ public class CollectibleController : MonoBehaviour, IInteractable
         Usable = false;
         _renderer.enabled = false;
         _collider.enabled = false;
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 1f);
     }
 }

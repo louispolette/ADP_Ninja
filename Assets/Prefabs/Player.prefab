@@ -70,13 +70,13 @@ MonoBehaviour:
   <MinimumVelocityForJumpCancel>k__BackingField: 3
   <JumpBufferDuration>k__BackingField: 0.15
   <GroundCheckWidth>k__BackingField: 0.4
-  <GroundCheckYOrigin>k__BackingField: 0.25
+  <GroundCheckYOrigin>k__BackingField: 0.15
   <GroundCheckLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
-  <FloatingGroundDetectionRange>k__BackingField: 1.5
+  <FloatingGroundDetectionRange>k__BackingField: 2
   <FloatingRideHeight>k__BackingField: 0.51
-  <SpringStrength>k__BackingField: 1500
+  <SpringStrength>k__BackingField: 2000
   <SpringDamper>k__BackingField: 50
   <CameraInput>k__BackingField: {fileID: 0}
   <CameraEffectController>k__BackingField: {fileID: 0}
