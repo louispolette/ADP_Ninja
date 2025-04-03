@@ -17,10 +17,13 @@ public class GameManager : MonoBehaviour
     [field: Header("Timings")]
 
     [field: SerializeField] public float TimeBeforeFadeOut { get; private set; } = 1f;
-    [field: SerializeField] public float IntroDuration { get; private set; } = 6f;
+    [field: SerializeField] public float TimeAfterIntroTravelling { get; private set; } = 3f;
+    [field: SerializeField] public float IntroTextDuration { get; private set; } = 6f;
 
     public bool MissionCompleted { get; private set; } = false;
     public bool QuittingGame { get; private set; } = false;
+
+    private bool _introTravellingDone = false;
 
     public const string MAIN_MENU_SCENE_NAME = "Main menu";
     public const string END_SCREEN_SCENE_NAME = "EndScene";
@@ -81,11 +84,18 @@ public class GameManager : MonoBehaviour
 
             BlackFadeController.Instance.FadeOut();
 
-            yield return new WaitForSeconds(BlackFadeController.Instance.FadeDuration);
+            IntroCameraController.Instance.StartIntroCameraTravelling();
+            IntroCameraController.Instance.OnIntroEnded += () => _introTravellingDone = true;
+
+            yield return new WaitUntil(() => _introTravellingDone);
+
+            IntroCameraController.Instance.OnIntroEnded -= () => _introTravellingDone = true;
+
+            yield return new WaitForSeconds(TimeAfterIntroTravelling);
 
             IntroUIController.Instance.Show();
 
-            yield return new WaitForSeconds(IntroDuration);
+            yield return new WaitForSeconds(IntroTextDuration);
 
             Player.EnableInput();
             IntroUIController.Instance.Hide();
