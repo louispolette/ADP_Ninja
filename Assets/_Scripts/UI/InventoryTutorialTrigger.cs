@@ -4,6 +4,6 @@ public class InventoryTutorialTrigger : MonoBehaviour
 {
     public void ShowTutorial()
     {
-        InnerDialogueController.Instance.ShowDialogue("Pres")
+        //InnerDialogueController.Instance.ShowDialogue("Pres");
     }
 }
