@@ -9,12 +9,14 @@ public class IntroCameraController : MonoBehaviour
 
     [field: Space]
 
+    [field: SerializeField] public Transform SelfTrackingTarget { get; private set; }
     [field: SerializeField] public Transform[] TrackingTargets { get; private set; }
 
     public Action OnIntroEnded { get; set; }
 
     private Animator _animator;
     private CinemachineCamera _virtualCamera;
+    private CinemachineSplineDolly _cinemachineSplineDolly;
 
     private void Awake()
     {
@@ -22,23 +24,45 @@ public class IntroCameraController : MonoBehaviour
 
         _animator = GetComponent<Animator>();
         _virtualCamera = GetComponentInChildren<CinemachineCamera>();
+        _cinemachineSplineDolly = GetComponentInChildren<CinemachineSplineDolly>();
     }
 
     public void StartIntroCameraTravelling()
     {
         _animator.SetTrigger("start");
-        _virtualCamera.Priority.Value = 0;
     }
 
     public void SetTrackingTarget(int targetIndex)
     {
         var newTarget = _virtualCamera.Target;
-        newTarget.TrackingTarget = TrackingTargets[targetIndex];
+
+        if (targetIndex < 0)
+        {
+            SelfTrackingTarget.transform.parent.forward = _virtualCamera.transform.forward;
+            newTarget.TrackingTarget = SelfTrackingTarget;
+        }
+        else
+        {
+            newTarget.TrackingTarget = TrackingTargets[targetIndex];
+        }
+
         _virtualCamera.Target = newTarget;
+    }
+
+    public void SetRotationMode(CinemachineSplineDolly.RotationMode newRotationMode)
+    {
+        _cinemachineSplineDolly.CameraRotation = newRotationMode;
+    }
+
+    public void LerpRotation(Vector3 targetRotation/*, float duration, AnimationCurve curve*/)
+    {
+
     }
 
     public void OnIntroEnd()
     {
+        _virtualCamera.Priority.Value = 0;
         OnIntroEnded?.Invoke();
     }
+
 }

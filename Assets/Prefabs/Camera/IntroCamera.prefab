@@ -30,6 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3706402558711525184}
+  - {fileID: 2603046109923785654}
   m_Father: {fileID: 26818599048337961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3667494203898423241
@@ -80,6 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a48bccbb34206244944057e1c189dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <SelfTrackingTarget>k__BackingField: {fileID: 8891011867050270174}
+  <TrackingTargets>k__BackingField:
+  - {fileID: 3706402558711525184}
 --- !u!95 &6231837149477762952
 Animator:
   serializedVersion: 7
@@ -129,8 +133,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3722560440919657580}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04891683, y: -0.70541275, z: 0.04891683, w: 0.70541275}
-  m_LocalPosition: {x: -20, y: 3.1499996, z: 1.751}
+  m_LocalRotation: {x: 0.0005210748, y: -0.7070638, z: 0.0005210117, w: 0.7071494}
+  m_LocalPosition: {x: -20, y: 2.0121613, z: 1.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -194,25 +198,27 @@ MonoBehaviour:
   m_SplineSettings:
     Spline: {fileID: 3325450358201289931}
     Position: 1
-    Units: 1
+    Units: 2
   SplineOffset: {x: 0, y: 0, z: 0}
-  CameraRotation: 4
+  CameraRotation: 2
   Damping:
-    Enabled: 1
+    Enabled: 0
     Position: {x: 0, y: 0, z: 0}
     Angular: 0
   AutomaticDolly:
     Enabled: 0
     Method:
-      rid: -2
+      rid: 4974394088624488525
   m_LegacyPosition: -1
   m_LegacyUnits: 0
   m_LegacySpline: {fileID: 0}
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 4974394088624488525
+      type: {class: SplineAutoDolly/FixedSpeed, ns: Unity.Cinemachine, asm: Unity.Cinemachine}
+      data:
+        Speed: 0
 --- !u!114 &4126108800716106964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,12 +242,65 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.5, y: 0.5}
+  Damping: {x: 5, y: 1}
   Lookahead:
     Enabled: 0
     Time: 0
     Smoothing: 0
     IgnoreY: 0
+--- !u!1 &3878339146230600729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2603046109923785654}
+  - component: {fileID: 1985368040099647234}
+  m_Layer: 0
+  m_Name: Self
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2603046109923785654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878339146230600729}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -20, y: 2.0121613, z: 1.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8891011867050270174}
+  m_Father: {fileID: 8737232405542059863}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1818360608 &1985368040099647234
+PositionConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878339146230600729}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: -20, y: 2.0121613, z: 1.75}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 391770776699120868}
+    weight: 1
 --- !u!1 &4463024370299166772
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +312,7 @@ GameObject:
   - component: {fileID: 7596429680270548030}
   - component: {fileID: 3325450358201289931}
   - component: {fileID: 6922526521022972513}
+  - component: {fileID: 4990993395092926825}
   m_Layer: 0
   m_Name: Dolly Spline
   m_TagString: Untagged
@@ -304,45 +364,45 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
-        x: 0
-        y: -6
-        z: 0
-      TangentIn:
-        x: 0
-        y: 0
-        z: -2.02857
-      TangentOut:
-        x: 0
-        y: 0
-        z: 2.02857
-      Rotation:
-        value:
-          x: 0.40969443
-          y: 0.5850083
-          z: -0.40584135
-          w: 0.57027066
-    - Position:
         x: 25
         y: 0
-        z: 0
+        z: -1.5
       TangentIn:
-        x: -0
-        y: -0
-        z: -2.570992
+        x: -8.059999
+        y: -8.629999
+        z: -0.0010000467
+      TangentOut:
+        x: 0
+        y: -7.62
+        z: 0
+      Rotation:
+        value:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+    - Position:
+        x: 0
+        y: -7.1378384
+        z: -0.0010000467
+      TangentIn:
+        x: 0
+        y: 0
+        z: -0
       TangentOut:
         x: 0
         y: 0
-        z: 2.570992
+        z: 0
       Rotation:
         value:
-          x: -0.14159834
-          y: 0.69278413
-          z: 0.023988662
-          w: 0.7066997
+          x: 0
+          y: 0
+          z: 0
+          w: 1
     m_MetaData:
-    - Mode: 2
+    - Mode: 4
       Tension: 0.5
-    - Mode: 0
+    - Mode: 4
       Tension: 0.5
     m_Closed: 0
     m_IntData:
@@ -368,6 +428,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoSmooth: 1
+--- !u!114 &4990993395092926825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4463024370299166772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8204899cee524bc2831d2745adc07e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Easing: 1
+  Roll:
+    m_IndexUnit: 2
+    m_DefaultValue:
+      Value: 0
+    m_DataPoints: []
+  m_StreamingVersion: 20241001
 --- !u!1 &8059495631045383683
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,4 +477,35 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8737232405542059863}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8163979657982765098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8891011867050270174}
+  m_Layer: 0
+  m_Name: SelfPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8891011867050270174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8163979657982765098}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2603046109923785654}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
