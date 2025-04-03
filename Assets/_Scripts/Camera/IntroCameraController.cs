@@ -54,11 +54,6 @@ public class IntroCameraController : MonoBehaviour
         _cinemachineSplineDolly.CameraRotation = newRotationMode;
     }
 
-    public void LerpRotation(Vector3 targetRotation/*, float duration, AnimationCurve curve*/)
-    {
-
-    }
-
     public void OnIntroEnd()
     {
         _virtualCamera.Priority.Value = 0;
