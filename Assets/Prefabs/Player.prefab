@@ -622,9 +622,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraTrackingTarget
       objectReference: {fileID: 0}
+    - target: {fileID: 2196820980027980360, guid: 987cac092e5d3a243a216ef93bb8ab24, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.9999999
+      objectReference: {fileID: 0}
     - target: {fileID: 4310968008006597665, guid: 987cac092e5d3a243a216ef93bb8ab24, type: 3}
       propertyPath: <JumpLookAtHeight>k__BackingField
       value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483741698861567614, guid: 987cac092e5d3a243a216ef93bb8ab24, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 6155396911657605813, guid: 987cac092e5d3a243a216ef93bb8ab24, type: 3}
       propertyPath: m_LocalPosition.x

@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            IntroCameraController.Instance.OnIntroEnd();
             BlackFadeController.Instance.FadeOut();
         }
         

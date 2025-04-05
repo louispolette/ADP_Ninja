@@ -163,7 +163,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 10
+  - time: 8.983334
     functionName: OnIntroEnd
     data: 
     objectReferenceParameter: {fileID: 0}
