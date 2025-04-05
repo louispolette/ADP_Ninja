@@ -111,8 +111,8 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FoamCutOff: 10.7
-    - _FoamScale: 80.12
+    - _FoamCutOff: 23.7
+    - _FoamScale: 74.05
     - _FromSpeed: 4.36
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -129,12 +129,12 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _Water_depth: 0.5
+    - _Water_depth: 1.59
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _refraction: 0.23
     - _refraction_scale: 3.84
-    - _refraction_speed: 0.24
+    - _refraction_speed: 0.51
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
