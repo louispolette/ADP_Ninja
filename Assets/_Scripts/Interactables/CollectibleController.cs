@@ -58,6 +58,6 @@ public class CollectibleController : MonoBehaviour, IInteractable
         OnCollect?.Invoke();
         InnerDialogueController.Instance.ShowDialogue($"{ItemData.name} added to inventory, press START to open", 5f);
         PlayCollectSFX();
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0f);
     }
 }
