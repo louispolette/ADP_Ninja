@@ -28,6 +28,8 @@ public class InventoryUIController : MonoBehaviour
     {
         InventoryItemRenderController.Instance.Deactivate();
         ItemDisplayImage.enabled = false;
+
+        UpdateItemDisplay(InventorySlots[0].InventoryItemData);
     }
 
     private void OnEnable()

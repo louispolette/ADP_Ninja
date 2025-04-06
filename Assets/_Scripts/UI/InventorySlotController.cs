@@ -14,6 +14,7 @@ public class InventorySlotController : MonoBehaviour, ISelectHandler
 
     [field : SerializeField] public RawImage Icon { get; private set; }
     [field: SerializeField] public TextMeshProUGUI AmountText { get; private set; }
+    [field: SerializeField] public AspectRatioFitter IconAspectRatioFitter { get; private set; }
 
     public static Action<InventoryItem> onItemSelected { get; set; }
 
@@ -44,6 +45,7 @@ public class InventorySlotController : MonoBehaviour, ISelectHandler
         if (InventoryItemData.itemData.icon != null)
         {
             Icon.texture = InventoryItemData.itemData.icon;
+            IconAspectRatioFitter.aspectRatio = (float)InventoryItemData.itemData.icon.width / (float)InventoryItemData.itemData.icon.height;
         }
         else
         {
