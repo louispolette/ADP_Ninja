@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1847787674521841429}
   - component: {fileID: 301256764801261426}
   - component: {fileID: 5258265440737612290}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3644944531174728969}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ClosedScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 3057914758075731604}
   - component: {fileID: 3185519654882242207}
   - component: {fileID: 5464966274234868191}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7096403674978097312}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 6878212606164986050}
   - component: {fileID: 3493592013429487739}
   - component: {fileID: 6601703611369996348}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,4 +15,5 @@ MonoBehaviour:
   label: Scroll
   itemID: 2
   icon: {fileID: 2800000, guid: dc35f4332689aa146a867b240278221d, type: 3}
+  displayModel: {fileID: 1216757831760531259, guid: 4be9b239aea55604f9e2f2e4da119df9, type: 3}
   description: The mission scroll, I need to get those war plans...

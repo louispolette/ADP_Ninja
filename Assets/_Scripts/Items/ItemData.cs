@@ -8,6 +8,7 @@ public class ItemData : ScriptableObject
     public string label;
     public int itemID;
     public Texture icon;
+    public GameObject displayModel;
 
     [Space]
 

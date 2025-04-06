@@ -24,6 +24,12 @@ public class InventoryUIController : MonoBehaviour
         _canvas = GetComponent<Canvas>();
     }
 
+    private void Start()
+    {
+        InventoryItemRenderController.Instance.Deactivate();
+        ItemDisplayImage.enabled = false;
+    }
+
     private void OnEnable()
     {
         InventorySlotController.onItemSelected += UpdateItemDisplay;
@@ -36,12 +42,14 @@ public class InventoryUIController : MonoBehaviour
 
     public void Show()
     {
+        InventoryItemRenderController.Instance.Activate();
         _canvas.enabled = true;
         UpdateSlots();
     }
 
     public void Hide()
     {
+        InventoryItemRenderController.Instance.Deactivate();
         _canvas.enabled = false;
     }
 
@@ -69,7 +77,6 @@ public class InventoryUIController : MonoBehaviour
         ItemNameText.text = "";
         ItemDescriptionText.text = "";
         ItemDisplayImage.enabled = false;
-        ItemDisplayImage.texture = null;
     }
 
     private void UpdateItemDisplay(InventoryItem inventoryItemData)
@@ -85,15 +92,15 @@ public class InventoryUIController : MonoBehaviour
         ItemNameText.text = itemData.name;
         ItemDescriptionText.text = itemData.description;
 
-        if (itemData.icon != null)
+        if (itemData.displayModel != null)
         {
             ItemDisplayImage.enabled = true;
-            ItemDisplayImage.texture = itemData.icon;
+            InventoryItemRenderController.Instance.SetItemToDisplay(itemData.displayModel);
         }
         else
         {
             ItemDisplayImage.enabled = false;
-            ItemDisplayImage.texture = null;
+            InventoryItemRenderController.Instance.ClearItemDisplay();
         }
         
     }
