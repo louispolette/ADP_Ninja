@@ -12,6 +12,6 @@ public class Play : MonoBehaviour
 
     private void LoadScene()
     {
-        SceneManager.LoadScene(1);
+        SceneLoader.Instance.LoadScene(1);
     }
 }
